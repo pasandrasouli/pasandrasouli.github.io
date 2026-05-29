@@ -357,6 +357,7 @@
             case '': this.currentPage = 'home'; break;
             default: this.currentPage = 'home'; window.location.hash = '';
           }
+          // 
           this.selectedProjectId = null;
         };
         window.addEventListener('hashchange', handleHash);
