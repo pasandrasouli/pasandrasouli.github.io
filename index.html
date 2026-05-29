@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" x-data="portfolio()" x-init="init()" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Designer Portfolio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+  <style>
+    * { font-family: Inter, sans-serif; }
+
+    body {
+      background: #050505;
+      color: white;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .fade {
+      animation: fade .35s ease;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .active {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-xl bg-black/40 border-b border-white/5">
+  <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+
+    <div class="font-semibold cursor-pointer" @click="go('/')">A.</div>
+
+    <nav class="hidden md:flex gap-8 text-sm text-white/60">
+      <a @click.prevent="go('/')" :class="navClass('/')">Home</a>
+      <a @click.prevent="go('/work')" :class="navClass('/work')">Work</a>
+      <a @click.prevent="go('/about')" :class="navClass('/about')">About</a>
+      <a @click.prevent="go('/process')" :class="navClass('/process')">Process</a>
+      <a @click.prevent="go('/contact')" :class="navClass('/contact')">Contact</a>
+    </nav>
+
+    <button @click="go('/contact')" class="px-5 py-2 rounded-full border border-white/10">
+      Let’s Talk
+    </button>
+
+  </div>
+</header>
+
+<!-- APP -->
+<main class="pt-28 max-w-6xl mx-auto px-6">
+
+  <!-- HOME -->
+  <section x-show="route==='/'" x-transition class="fade min-h-[75vh] flex items-center">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+      <div>
+        <p class="text-white/40 text-xs tracking-[0.25em] uppercase">Product Designer</p>
+
+        <h1 class="text-5xl md:text-7xl font-semibold leading-[0.95] mt-6">
+          Designing products that feel <span class="text-gray-300">effortless.</span>
+        </h1>
+
+        <p class="text-white/50 mt-6 text-lg">
+          UX, UI systems, and product strategy for modern digital products.
+        </p>
+
+        <div class="flex gap-4 mt-8">
+          <button @click="go('/work')" class="bg-white text-black px-6 py-3 rounded-full">
+            View Work
+          </button>
+          <button @click="go('/about')" class="glass px-6 py-3 rounded-full">
+            About
+          </button>
+        </div>
+      </div>
+
+      <div class="glass p-4 rounded-3xl rotate-2">
+        <img class="rounded-2xl h-[520px] w-full object-cover"
+             src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=1200&auto=format&fit=crop">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WORK LIST -->
+  <section x-show="route==='/work'" x-transition class="fade space-y-10">
+
+    <h2 class="text-5xl font-semibold">Selected Work</h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+
+      <template x-for="p in projects" :key="p.slug">
+        <div
+          class="glass rounded-2xl overflow-hidden cursor-pointer hover:scale-[1.02] transition"
+          @click="go('/work/' + p.slug)"
+        >
+          <img :src="p.image" class="h-72 w-full object-cover" />
+
+          <div class="p-6">
+            <h3 class="text-2xl" x-text="p.title"></h3>
+            <p class="text-white/40" x-text="p.tag"></p>
+          </div>
+        </div>
+      </template>
+
+    </div>
+  </section>
+
+  <!-- WORK DETAIL -->
+  <section x-show="route.startsWith('/work/') && currentProject"
+           x-transition
+           class="fade space-y-10">
+
+    <button @click="go('/work')" class="text-white/50 hover:text-white">
+      ← Back
+    </button>
+
+    <img :src="currentProject.image"
+         class="w-full h-[420px] object-cover rounded-2xl glass"/>
+
+    <div class="space-y-4">
+      <h1 class="text-5xl font-semibold" x-text="currentProject.title"></h1>
+      <p class="text-white/40" x-text="currentProject.tag"></p>
+      <p class="text-white/60 max-w-2xl leading-relaxed" x-text="currentProject.desc"></p>
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+  <section x-show="route==='/about'" x-transition class="fade space-y-10">
+    <h2 class="text-5xl font-semibold">About</h2>
+
+    <p class="text-white/50 text-lg max-w-2xl">
+      Product designer focused on simplifying complex systems into intuitive experiences.
+    </p>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <template x-for="s in stats" :key="s.label">
+        <div class="glass p-6 rounded-2xl">
+          <div class="text-3xl font-semibold" x-text="s.value"></div>
+          <div class="text-white/40" x-text="s.label"></div>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section x-show="route==='/process'" x-transition class="fade space-y-10">
+    <h2 class="text-5xl font-semibold">Process</h2>
+
+    <div class="grid md:grid-cols-4 gap-6">
+      <template x-for="(p,i) in process" :key="p.title">
+        <div class="glass p-6 rounded-2xl">
+          <div class="text-white/30 mb-4" x-text="String(i+1).padStart(2,'0')"></div>
+          <h3 class="text-xl" x-text="p.title"></h3>
+          <p class="text-white/40 mt-2 text-sm" x-text="p.desc"></p>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section x-show="route==='/contact'" x-transition class="fade text-center space-y-8">
+    <h2 class="text-6xl font-semibold">Let’s build something</h2>
+
+    <p class="text-white/50">Open to freelance & product roles.</p>
+
+    <a href="mailto:hello@example.com"
+       class="bg-white text-black px-8 py-4 rounded-full inline-block">
+      hello@example.com
+    </a>
+  </section>
+
+</main>
+
+<!-- SCRIPT -->
+<script>
+function portfolio() {
+  return {
+    route: "/",
+    currentProject: null,
+
+    projects: [
+      {
+        slug: "fintech-dashboard",
+        title: "Fintech Dashboard",
+        tag: "SaaS Product",
+        image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?q=80&w=1200&auto=format&fit=crop",
+        desc: "A financial platform for tracking investments, analytics, and portfolio performance."
+      },
+      {
+        slug: "ai-productivity-app",
+        title: "AI Productivity App",
+        tag: "Mobile UX",
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop",
+        desc: "An AI assistant that helps users plan, write, and organize daily work."
+      },
+      {
+        slug: "analytics-platform",
+        title: "Analytics Platform",
+        tag: "Dashboard UX",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+        desc: "Enterprise analytics platform with real-time data visualization."
+      },
+      {
+        slug: "design-system",
+        title: "Design System",
+        tag: "UI Infrastructure",
+        image: "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?q=80&w=1200&auto=format&fit=crop",
+        desc: "A scalable design system used across multiple product teams."
+      }
+    ],
+
+    stats: [
+      { value: "5+", label: "Years Experience" },
+      { value: "30+", label: "Projects" },
+      { value: "10+", label: "Design Systems" },
+      { value: "∞", label: "Curiosity" }
+    ],
+
+    process: [
+      { title: "Discover", desc: "User research & problem framing" },
+      { title: "Define", desc: "UX flows & structure" },
+      { title: "Design", desc: "UI systems & visuals" },
+      { title: "Deliver", desc: "Handoff & iteration" }
+    ],
+
+    init() {
+      this.navigate(window.location.pathname);
+
+      window.addEventListener("popstate", () => {
+        this.navigate(window.location.pathname, false);
+      });
+    },
+
+    navigate(path, push = true) {
+      if (push) history.pushState({}, "", path);
+
+      this.route = path;
+
+      // detect project route
+      if (path.startsWith("/work/")) {
+        const slug = path.split("/")[2];
+        this.currentProject = this.projects.find(p => p.slug === slug);
+      } else {
+        this.currentProject = null;
+      }
+    },
+
+    go(path) {
+      this.navigate(path);
+    },
+
+    navClass(path) {
+      return this.route === path
+        ? "text-white"
+        : "text-white/60 hover:text-white";
+    }
+  }
+}
+</script>
+
+</body>
+</html>
