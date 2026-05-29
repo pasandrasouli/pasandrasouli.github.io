@@ -7,7 +7,5 @@ python -m http.server
 
 ## Commit and push
 ```bash
-git add . && git commit -m "chore" && git push
-
-git commit -am "..." && git push
+git commit -am "msg" && git push
 ```
