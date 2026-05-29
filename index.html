@@ -1,280 +1,369 @@
 <!DOCTYPE html>
-<html lang="en" x-data="portfolio()" x-init="init()" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Product Designer Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A. — Product Designer SPA</title>
 
+  <!-- TailwindCSS + Alpine.js -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
   <style>
-    * { font-family: Inter, sans-serif; }
-
-    body {
-      background: #050505;
-      color: white;
-    }
-
+    * { font-family: "Inter", sans-serif; }
+    body { background: #050505; overflow-x: hidden; }
     .glass {
       background: rgba(255,255,255,0.03);
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(16px);
       border: 1px solid rgba(255,255,255,0.08);
     }
-
-    .fade {
-      animation: fade .35s ease;
+    .gradient-text {
+      background: linear-gradient(to right, #ffffff, #7d7d7d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-
-    @keyframes fade {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+    .noise {
+      position: fixed;
+      inset: 0;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 999;
+      background-image: radial-gradient(circle at 20% 20%, white 1px, transparent 1px), radial-gradient(circle at 80% 80%, white 1px, transparent 1px);
+      background-size: 4px 4px;
     }
-
-    .active {
+    .glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
+      filter: blur(80px);
+      z-index: -1;
+    }
+    .project-card:hover img { transform: scale(1.03); }
+    .project-card img { transition: 0.6s ease; }
+    .page-transition { transition: opacity 0.3s ease, transform 0.3s ease; }
+    .nav-link-active {
       color: white;
+      font-weight: 500;
+      position: relative;
+    }
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
     }
   </style>
 </head>
+<body class="text-white antialiased" x-data="app()" x-init="initRouter()">
 
-<body>
+<div class="noise"></div>
 
-<!-- NAV -->
-<header class="fixed top-0 w-full z-50 backdrop-blur-xl bg-black/40 border-b border-white/5">
-  <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+<!-- PERSISTENT HEADER -->
+<header class="fixed top-0 left-0 w-full z-50 border-b border-white/5 backdrop-blur-xl bg-black/30">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <a href="#" @click.prevent="navigate('home')" class="text-xl font-semibold tracking-tight">A.</a>
 
-    <div class="font-semibold cursor-pointer" @click="go('/')">A.</div>
-
-    <nav class="hidden md:flex gap-8 text-sm text-white/60">
-      <a @click.prevent="go('/')" :class="navClass('/')">Home</a>
-      <a @click.prevent="go('/work')" :class="navClass('/work')">Work</a>
-      <a @click.prevent="go('/about')" :class="navClass('/about')">About</a>
-      <a @click.prevent="go('/process')" :class="navClass('/process')">Process</a>
-      <a @click.prevent="go('/contact')" :class="navClass('/contact')">Contact</a>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-white/60">
+      <a href="#" @click.prevent="navigate('home')" class="nav-link transition hover:text-white" :class="{'nav-link-active': currentPage === 'home'}">Home</a>
+      <a href="#" @click.prevent="navigate('work')" class="nav-link transition hover:text-white" :class="{'nav-link-active': currentPage === 'work'}">Work</a>
+      <a href="#" @click.prevent="navigate('about')" class="nav-link transition hover:text-white" :class="{'nav-link-active': currentPage === 'about'}">About</a>
+      <a href="#" @click.prevent="navigate('process')" class="nav-link transition hover:text-white" :class="{'nav-link-active': currentPage === 'process'}">Process</a>
+      <a href="#" @click.prevent="navigate('contact')" class="nav-link transition hover:text-white" :class="{'nav-link-active': currentPage === 'contact'}">Contact</a>
     </nav>
 
-    <button @click="go('/contact')" class="px-5 py-2 rounded-full border border-white/10">
-      Let’s Talk
-    </button>
-
+    <a href="#" @click.prevent="navigate('contact')" class="border border-white/10 hover:border-white/30 transition px-5 py-2 rounded-full text-sm">Let's Talk</a>
   </div>
 </header>
 
-<!-- APP -->
-<main class="pt-28 max-w-6xl mx-auto px-6">
-
-  <!-- HOME -->
-  <section x-show="route==='/'" x-transition class="fade min-h-[75vh] flex items-center">
-    <div class="grid lg:grid-cols-2 gap-14 items-center">
-
-      <div>
-        <p class="text-white/40 text-xs tracking-[0.25em] uppercase">Product Designer</p>
-
-        <h1 class="text-5xl md:text-7xl font-semibold leading-[0.95] mt-6">
-          Designing products that feel <span class="text-gray-300">effortless.</span>
-        </h1>
-
-        <p class="text-white/50 mt-6 text-lg">
-          UX, UI systems, and product strategy for modern digital products.
-        </p>
-
-        <div class="flex gap-4 mt-8">
-          <button @click="go('/work')" class="bg-white text-black px-6 py-3 rounded-full">
-            View Work
-          </button>
-          <button @click="go('/about')" class="glass px-6 py-3 rounded-full">
-            About
-          </button>
-        </div>
-      </div>
-
-      <div class="glass p-4 rounded-3xl rotate-2">
-        <img class="rounded-2xl h-[520px] w-full object-cover"
-             src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=1200&auto=format&fit=crop">
-      </div>
-
-    </div>
-  </section>
-
-  <!-- WORK LIST -->
-  <section x-show="route==='/work'" x-transition class="fade space-y-10">
-
-    <h2 class="text-5xl font-semibold">Selected Work</h2>
-
-    <div class="grid md:grid-cols-2 gap-8">
-
-      <template x-for="p in projects" :key="p.slug">
-        <div
-          class="glass rounded-2xl overflow-hidden cursor-pointer hover:scale-[1.02] transition"
-          @click="go('/work/' + p.slug)"
-        >
-          <img :src="p.image" class="h-72 w-full object-cover" />
-
-          <div class="p-6">
-            <h3 class="text-2xl" x-text="p.title"></h3>
-            <p class="text-white/40" x-text="p.tag"></p>
+<!-- MAIN DYNAMIC CONTENT (Alpine.js SPA) -->
+<main class="pt-28 relative min-h-[calc(100vh-120px)]">
+  <!-- Page transitions with x-show + x-transition -->
+  <div x-show="currentPage === 'home'" x-transition.opacity.duration.300ms class="w-full">
+    <div class="relative overflow-hidden">
+      <div class="glow top-[-200px] left-[-100px]"></div>
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center min-h-[85vh]">
+        <div>
+          <div class="mb-6"><span class="text-xs tracking-[0.25em] uppercase text-white/40">Product Designer</span></div>
+          <h1 class="text-5xl md:text-7xl leading-[0.95] font-semibold tracking-[-0.06em] max-w-2xl">
+            I design digital products that feel <span class="gradient-text">effortless.</span>
+          </h1>
+          <p class="mt-8 text-white/50 text-lg leading-relaxed max-w-xl">Product designer focused on crafting modern digital experiences, intuitive interfaces, and scalable design systems.</p>
+          <div class="mt-10 flex items-center gap-4 flex-wrap">
+            <a href="#" @click.prevent="navigate('work')" class="bg-white text-black px-7 py-4 rounded-full font-medium hover:scale-105 transition inline-block">View Work</a>
+            <a href="#" @click.prevent="navigate('about')" class="glass px-7 py-4 rounded-full hover:bg-white/5 transition inline-block">About Me</a>
           </div>
         </div>
-      </template>
-
-    </div>
-  </section>
-
-  <!-- WORK DETAIL -->
-  <section x-show="route.startsWith('/work/') && currentProject"
-           x-transition
-           class="fade space-y-10">
-
-    <button @click="go('/work')" class="text-white/50 hover:text-white">
-      ← Back
-    </button>
-
-    <img :src="currentProject.image"
-         class="w-full h-[420px] object-cover rounded-2xl glass"/>
-
-    <div class="space-y-4">
-      <h1 class="text-5xl font-semibold" x-text="currentProject.title"></h1>
-      <p class="text-white/40" x-text="currentProject.tag"></p>
-      <p class="text-white/60 max-w-2xl leading-relaxed" x-text="currentProject.desc"></p>
-    </div>
-
-  </section>
-
-  <!-- ABOUT -->
-  <section x-show="route==='/about'" x-transition class="fade space-y-10">
-    <h2 class="text-5xl font-semibold">About</h2>
-
-    <p class="text-white/50 text-lg max-w-2xl">
-      Product designer focused on simplifying complex systems into intuitive experiences.
-    </p>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <template x-for="s in stats" :key="s.label">
-        <div class="glass p-6 rounded-2xl">
-          <div class="text-3xl font-semibold" x-text="s.value"></div>
-          <div class="text-white/40" x-text="s.label"></div>
+        <div class="relative">
+          <div class="glass rounded-[32px] p-6 rotate-3 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" class="rounded-2xl w-full h-[650px] object-cover" alt="design showcase">
+          </div>
         </div>
-      </template>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- PROCESS -->
-  <section x-show="route==='/process'" x-transition class="fade space-y-10">
-    <h2 class="text-5xl font-semibold">Process</h2>
-
-    <div class="grid md:grid-cols-4 gap-6">
-      <template x-for="(p,i) in process" :key="p.title">
-        <div class="glass p-6 rounded-2xl">
-          <div class="text-white/30 mb-4" x-text="String(i+1).padStart(2,'0')"></div>
-          <h3 class="text-xl" x-text="p.title"></h3>
-          <p class="text-white/40 mt-2 text-sm" x-text="p.desc"></p>
+  <!-- WORK LISTING PAGE -->
+  <div x-show="currentPage === 'work'" x-transition.opacity.duration.300ms class="w-full">
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <div class="flex items-end justify-between mb-14 flex-wrap gap-6">
+        <div>
+          <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-4">Selected Work</p>
+          <h2 class="text-4xl md:text-6xl font-semibold tracking-tight">Featured Projects</h2>
         </div>
-      </template>
+        <p class="text-white/40 max-w-sm text-base">A curated selection of product design work across SaaS, fintech, AI, and mobile experiences.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <template x-for="project in projects" :key="project.id">
+          <div class="project-card glass rounded-[28px] overflow-hidden cursor-pointer group" @click="openProjectDetail(project.id)">
+            <div class="overflow-hidden">
+              <img :src="project.coverImage" class="w-full h-[380px] object-cover transition duration-500 group-hover:scale-105">
+            </div>
+            <div class="p-8">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="text-2xl font-medium" x-text="project.title"></h3>
+                  <p class="text-white/40 mt-2" x-text="project.category"></p>
+                </div>
+                <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition">↗</div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- CONTACT -->
-  <section x-show="route==='/contact'" x-transition class="fade text-center space-y-8">
-    <h2 class="text-6xl font-semibold">Let’s build something</h2>
+  <!-- PROJECT DETAIL PAGE -->
+  <div x-show="currentPage === 'project-detail'" x-transition.opacity.duration.300ms class="w-full">
+    <div class="max-w-5xl mx-auto px-6 py-8">
+      <button @click="navigate('work')" class="glass px-5 py-2 rounded-full text-sm flex items-center gap-2 mb-8 hover:bg-white/5 transition">
+        ← Back to all work
+      </button>
 
-    <p class="text-white/50">Open to freelance & product roles.</p>
+      <div class="glass rounded-3xl overflow-hidden">
+        <img :src="selectedProject?.coverImage" class="w-full h-[450px] object-cover">
+        <div class="p-8 md:p-12">
+          <div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+            <div>
+              <h1 class="text-4xl md:text-5xl font-semibold tracking-tight" x-text="selectedProject?.title"></h1>
+              <p class="text-white/40 mt-2 text-lg" x-text="selectedProject?.category"></p>
+            </div>
+            <div class="bg-white/10 rounded-full px-4 py-2 text-sm">Case Study</div>
+          </div>
 
-    <a href="mailto:hello@example.com"
-       class="bg-white text-black px-8 py-4 rounded-full inline-block">
-      hello@example.com
-    </a>
-  </section>
+          <div class="prose prose-invert max-w-none">
+            <p class="text-white/70 text-lg leading-relaxed" x-text="selectedProject?.fullDescription"></p>
 
+            <div class="grid md:grid-cols-2 gap-8 mt-10">
+              <div class="glass rounded-2xl p-6">
+                <h3 class="text-xl font-medium mb-2">Challenge</h3>
+                <p class="text-white/50" x-text="selectedProject?.challenge"></p>
+              </div>
+              <div class="glass rounded-2xl p-6">
+                <h3 class="text-xl font-medium mb-2">Solution</h3>
+                <p class="text-white/50" x-text="selectedProject?.solution"></p>
+              </div>
+            </div>
+
+            <div class="mt-10">
+              <h3 class="text-2xl font-medium mb-4">Key results</h3>
+              <ul class="list-disc list-inside text-white/60 space-y-2">
+                <template x-for="result in selectedProject?.results">
+                  <li x-text="result"></li>
+                </template>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div x-show="currentPage === 'about'" x-transition.opacity.duration.300ms class="w-full">
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <div class="grid lg:grid-cols-2 gap-20 items-start">
+        <div>
+          <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-5">About</p>
+          <h2 class="text-5xl font-semibold tracking-tight leading-tight">Building thoughtful experiences through clarity and systems thinking.</h2>
+        </div>
+        <div>
+          <p class="text-white/50 text-lg leading-relaxed">I'm a product designer focused on simplifying complexity through clean UX and scalable UI systems. I enjoy turning product strategy into interfaces that feel intuitive, fast, and visually refined.</p>
+          <div class="grid grid-cols-2 gap-6 mt-12">
+            <div class="glass rounded-3xl p-8"><h3 class="text-4xl font-semibold">5+</h3><p class="text-white/40 mt-2">Years Experience</p></div>
+            <div class="glass rounded-3xl p-8"><h3 class="text-4xl font-semibold">30+</h3><p class="text-white/40 mt-2">Projects Designed</p></div>
+            <div class="glass rounded-3xl p-8"><h3 class="text-4xl font-semibold">10+</h3><p class="text-white/40 mt-2">Design Systems</p></div>
+            <div class="glass rounded-3xl p-8"><h3 class="text-4xl font-semibold">∞</h3><p class="text-white/40 mt-2">Curiosity</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS PAGE -->
+  <div x-show="currentPage === 'process'" x-transition.opacity.duration.300ms class="w-full">
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <div class="mb-20">
+        <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-4">Process</p>
+        <h2 class="text-5xl font-semibold tracking-tight">How I work</h2>
+      </div>
+      <div class="grid md:grid-cols-4 gap-6">
+        <div class="glass rounded-3xl p-8"><div class="text-white/30 text-sm mb-8">01</div><h3 class="text-2xl mb-4">Discover</h3><p class="text-white/40 leading-relaxed">Understanding users, business goals, and product constraints.</p></div>
+        <div class="glass rounded-3xl p-8"><div class="text-white/30 text-sm mb-8">02</div><h3 class="text-2xl mb-4">Define</h3><p class="text-white/40 leading-relaxed">Clarifying flows, priorities, and UX direction.</p></div>
+        <div class="glass rounded-3xl p-8"><div class="text-white/30 text-sm mb-8">03</div><h3 class="text-2xl mb-4">Design</h3><p class="text-white/40 leading-relaxed">Crafting polished interfaces and scalable systems.</p></div>
+        <div class="glass rounded-3xl p-8"><div class="text-white/30 text-sm mb-8">04</div><h3 class="text-2xl mb-4">Deliver</h3><p class="text-white/40 leading-relaxed">Collaborating closely with developers for execution.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div x-show="currentPage === 'contact'" x-transition.opacity.duration.300ms class="w-full">
+    <div class="relative overflow-hidden py-12">
+      <div class="glow bottom-[-100px] right-[-100px]"></div>
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-6">Contact</p>
+        <h2 class="text-5xl md:text-7xl font-semibold tracking-tight leading-[1.1]">Let's create something exceptional.</h2>
+        <p class="text-white/50 text-lg mt-8 max-w-2xl mx-auto leading-relaxed">Open to freelance projects, product collaborations, and full-time opportunities.</p>
+        <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
+          <a href="mailto:hello@example.com" class="bg-white text-black px-8 py-4 rounded-full font-medium hover:scale-105 transition">hello@example.com</a>
+          <a href="#" @click.prevent="navigate('contact')" class="glass px-8 py-4 rounded-full hover:bg-white/5 transition">LinkedIn</a>
+          <a href="#" @click.prevent="navigate('contact')" class="glass px-8 py-4 rounded-full hover:bg-white/5 transition">Dribbble</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
-<!-- SCRIPT -->
+<!-- FOOTER -->
+<footer class="border-t border-white/5 py-8 mt-12">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-white/30">
+    <p>© 2026 Aria Chen. All rights reserved.</p>
+    <div class="flex items-center gap-6">
+      <a href="#" @click.prevent="navigate('contact')" class="hover:text-white transition">Twitter</a>
+      <a href="#" @click.prevent="navigate('contact')" class="hover:text-white transition">LinkedIn</a>
+      <a href="#" @click.prevent="navigate('contact')" class="hover:text-white transition">Behance</a>
+    </div>
+  </div>
+</footer>
+
 <script>
-function portfolio() {
-  return {
-    route: "/",
-    currentProject: null,
-
-    projects: [
-      {
-        slug: "fintech-dashboard",
-        title: "Fintech Dashboard",
-        tag: "SaaS Product",
-        image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?q=80&w=1200&auto=format&fit=crop",
-        desc: "A financial platform for tracking investments, analytics, and portfolio performance."
+  function app() {
+    return {
+      currentPage: 'home',     // home, work, project-detail, about, process, contact
+      selectedProjectId: null,
+      projects: [
+        {
+          id: 1,
+          title: 'Fintech Dashboard',
+          category: 'Product Design • SaaS',
+          coverImage: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?q=80&w=1200&auto=format&fit=crop',
+          fullDescription: 'A next-gen financial analytics dashboard that consolidates real-time data, giving users a clear overview of investments, spending, and forecasting. Designed for speed and clarity.',
+          challenge: 'Users were overwhelmed with complex data tables and slow performance. The goal was to simplify without losing depth.',
+          solution: 'We built a modular dashboard with predictive widgets, dark/light mode, and intelligent defaults. Reduced load times by 40%.',
+          results: ['40% faster data retrieval', '85% user satisfaction increase', 'Adopted by 3 major fintech partners']
+        },
+        {
+          id: 2,
+          title: 'AI Productivity App',
+          category: 'UX Strategy • Mobile',
+          coverImage: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop',
+          fullDescription: 'An AI-powered to-do and focus assistant that learns user habits and suggests optimal workflows. Seamless cross-platform experience.',
+          challenge: 'Users felt overwhelmed by traditional task managers. The app needed to feel proactive, not reactive.',
+          solution: 'Designed an adaptive interface with contextual AI prompts, gamified focus sessions, and natural language input.',
+          results: ['42% higher task completion', '4.8⭐ on App Store', 'Acquired 50k+ monthly active users']
+        },
+        {
+          id: 3,
+          title: 'Analytics Platform',
+          category: 'Dashboard UX • Web App',
+          coverImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
+          fullDescription: 'Enterprise-grade analytics platform with customizable reports, real-time collaboration, and interactive data visualizations.',
+          challenge: 'Complex datasets required an intuitive filtering system. Existing tools were too rigid.',
+          solution: 'Created a flexible drag-and-drop report builder, real-time sync, and role-based views.',
+          results: ['Reduced setup time by 60%', 'Loved by data teams', 'Scaled to 200+ companies']
+        },
+        {
+          id: 4,
+          title: 'Design System',
+          category: 'UI Infrastructure',
+          coverImage: 'https://images.unsplash.com/photo-1516321165247-4aa89a48be28?q=80&w=1200&auto=format&fit=crop',
+          fullDescription: 'A comprehensive design system with components, tokens, and documentation used across 8 product teams to ensure consistency.',
+          challenge: 'Inconsistent UI across teams led to poor user experience and wasted development time.',
+          solution: 'Built a modular system with Figma library and Storybook, including dark mode and accessibility-first components.',
+          results: ['50% faster design-dev handoff', '100% accessibility compliance', 'Adopted company-wide']
+        }
+      ],
+      get selectedProject() {
+        if (!this.selectedProjectId) return null;
+        return this.projects.find(p => p.id === this.selectedProjectId);
       },
-      {
-        slug: "ai-productivity-app",
-        title: "AI Productivity App",
-        tag: "Mobile UX",
-        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop",
-        desc: "An AI assistant that helps users plan, write, and organize daily work."
+      navigate(page, projectId = null) {
+        if (page === 'project-detail' && projectId) {
+          this.selectedProjectId = projectId;
+          this.currentPage = 'project-detail';
+          // update browser hash
+          window.location.hash = `project/${projectId}`;
+        } else if (page === 'work') {
+          this.currentPage = 'work';
+          this.selectedProjectId = null;
+          window.location.hash = 'work';
+        } else if (page === 'home') {
+          this.currentPage = 'home';
+          window.location.hash = '';
+        } else if (page === 'about') {
+          this.currentPage = 'about';
+          window.location.hash = 'about';
+        } else if (page === 'process') {
+          this.currentPage = 'process';
+          window.location.hash = 'process';
+        } else if (page === 'contact') {
+          this.currentPage = 'contact';
+          window.location.hash = 'contact';
+        }
+        // scroll to top on navigation
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       },
-      {
-        slug: "analytics-platform",
-        title: "Analytics Platform",
-        tag: "Dashboard UX",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
-        desc: "Enterprise analytics platform with real-time data visualization."
+      openProjectDetail(id) {
+        this.navigate('project-detail', id);
       },
-      {
-        slug: "design-system",
-        title: "Design System",
-        tag: "UI Infrastructure",
-        image: "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?q=80&w=1200&auto=format&fit=crop",
-        desc: "A scalable design system used across multiple product teams."
+      initRouter() {
+        // handle initial hash and back/forward
+        const handleHash = () => {
+          const hash = window.location.hash.slice(1); // remove '#'
+          if (hash.startsWith('project/')) {
+            const id = parseInt(hash.split('/')[1]);
+            if (id && this.projects.find(p => p.id === id)) {
+              this.currentPage = 'project-detail';
+              this.selectedProjectId = id;
+              return;
+            }
+          }
+          switch (hash) {
+            case 'work': this.currentPage = 'work'; break;
+            case 'about': this.currentPage = 'about'; break;
+            case 'process': this.currentPage = 'process'; break;
+            case 'contact': this.currentPage = 'contact'; break;
+            case '': this.currentPage = 'home'; break;
+            default: this.currentPage = 'home'; window.location.hash = '';
+          }
+          this.selectedProjectId = null;
+        };
+        window.addEventListener('hashchange', handleHash);
+        handleHash(); // initial call
       }
-    ],
-
-    stats: [
-      { value: "5+", label: "Years Experience" },
-      { value: "30+", label: "Projects" },
-      { value: "10+", label: "Design Systems" },
-      { value: "∞", label: "Curiosity" }
-    ],
-
-    process: [
-      { title: "Discover", desc: "User research & problem framing" },
-      { title: "Define", desc: "UX flows & structure" },
-      { title: "Design", desc: "UI systems & visuals" },
-      { title: "Deliver", desc: "Handoff & iteration" }
-    ],
-
-    init() {
-      this.navigate(window.location.pathname);
-
-      window.addEventListener("popstate", () => {
-        this.navigate(window.location.pathname, false);
-      });
-    },
-
-    navigate(path, push = true) {
-      if (push) history.pushState({}, "", path);
-
-      this.route = path;
-
-      // detect project route
-      if (path.startsWith("/work/")) {
-        const slug = path.split("/")[2];
-        this.currentProject = this.projects.find(p => p.slug === slug);
-      } else {
-        this.currentProject = null;
-      }
-    },
-
-    go(path) {
-      this.navigate(path);
-    },
-
-    navClass(path) {
-      return this.route === path
-        ? "text-white"
-        : "text-white/60 hover:text-white";
-    }
+    };
   }
-}
 </script>
-
 </body>
 </html>
