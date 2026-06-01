@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A. — Product Designer SPA</title>
+  <title>Pasand Rasouli _Product Designer</title>
 
   <!-- TailwindCSS + Alpine.js -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="tail.css"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
   <!-- Fonts -->
@@ -23,7 +23,7 @@
       border: 1px solid rgba(255,255,255,0.08);
     }
     .gradient-text {
-      background: linear-gradient(to right, #ffffff, #7d7d7d);
+      background: linear-gradient(to right, #ffffff, #454152);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -36,14 +36,155 @@
       background-image: radial-gradient(circle at 20% 20%, white 1px, transparent 1px), radial-gradient(circle at 80% 80%, white 1px, transparent 1px);
       background-size: 4px 4px;
     }
-    .glow {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
-      filter: blur(80px);
-      z-index: -1;
-    }
+    /* کروسل مهارت‌ها - حرکت از چپ به راست */
+@keyframes marqueeLeftToRight {
+ 0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  animation: marqueeLeftToRight 50s linear infinite;
+  width: max-content;
+}
+.marquee-container {
+  width: 100%;
+  overflow-x: hidden;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+.skill-tag {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(4px);
+  border-radius: 100px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  pointer-events: none; /* غیرفعال کردن کلیک */
+}
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes lineMove {
+  0% { transform: translateX(-100%) skewX(-20deg); }
+  100% { transform: translateX(400%) skewX(-20deg); }
+}
+@keyframes pulseGlow {
+  0% { opacity: 0.3; transform: scale(0.8); }
+  100% { opacity: 0.8; transform: scale(1.2); }
+}
+@keyframes floatParticle {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(80px, -60px) rotate(45deg); }
+}
+@keyframes slowDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, -30px) scale(1.3); }
+}
+@keyframes verySlowRotate {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-20px, 40px) rotate(10deg); }
+}
+.circle-slow {
+  animation: slowDrift 20s infinite alternate ease-in-out;
+}
+.circle-slower {
+  animation: verySlowRotate 25s infinite alternate ease-in-out;
+}
+/* خط نورانی آهسته تر */
+@keyframes lineMoveSlow {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(300%) skewX(-15deg); }
+}
+.glow-line-slow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  animation: lineMoveSlow 12s infinite linear;
+  pointer-events: none;
+}
+.animated-gradient-bg {
+  background: linear-gradient(125deg, #050505, #0f0f1a, #1a1a2e, #050505);
+  background-size: 300% 300%;
+  animation: gradientFlow 10s ease infinite;
+}
+.glow-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: lineMove 6s infinite linear;
+  pointer-events: none;
+}
+.particle {
+  position: absolute;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  filter: blur(2px);
+  animation: floatParticle 8s infinite alternate ease-in-out;
+}
+.drift-animation {
+  animation: slowDrift 14s infinite alternate ease-in-out;
+}
+.drift-animation-delayed {
+  animation: slowDrift 18s infinite alternate-reverse ease-in-out;
+}
+    @keyframes slowMove {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.1); }
+  100% { transform: translate(-20px, 30px) scale(0.9); }
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes textGlow {
+  0% { text-shadow: 0 0 0px rgba(255,255,255,0); }
+  50% { text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+  100% { text-shadow: 0 0 0px rgba(255,255,255,0); }
+}
+.animated-bg {
+  background: radial-gradient(circle at 20% 30%, rgba(40,40,50,0.8), #050505);
+  background-size: 200% 200%;
+  animation: gradientShift 12s ease infinite;
+}
+@keyframes softPulse {
+  0% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.6); }
+  50% { opacity: 0.3; transform: translate(-50%, -50%) scale(2); }
+  100% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.6); }
+}
+.soft-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 11, 224, ۱) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: softPulse 5s ease-in-out infinite;
+  filter: blur(20px);
+}
+.floating-circle {
+  position: absolute;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: slowMove 18s infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
     .project-card:hover img { transform: scale(1.03); }
     .project-card img { transition: 0.6s ease; }
     .page-transition { transition: opacity 0.3s ease, transform 0.3s ease; }
@@ -62,6 +203,55 @@
       background: white;
       border-radius: 2px;
     }
+
+.glass-cursor {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width 0.2s, height 0.2s, backdrop-filter 0.2s, border-color 0.2s;
+  will-change: left, top;
+}
+
+.glass-cursor.active {
+  opacity: 1;
+}
+
+/* حالت مگنیفای (هاور روی اهداف) */
+.glass-cursor.magnify {
+  width: 120px;
+  height: 120px;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: 2px;
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+/* تصویر بزرگ‌شده داخل canvas */
+.glass-cursor canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.glass-cursor.click {
+  transform: translate(-50%, -50%) scale(0.85);
+  transition: transform 0.1s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+}
   </style>
 </head>
 <body class="text-white antialiased" x-data="app()" x-init="initRouter()">
@@ -71,7 +261,7 @@
 <!-- PERSISTENT HEADER -->
 <header class="fixed top-0 left-0 w-full z-50 border-b border-white/5 backdrop-blur-xl bg-black/30">
   <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-    <a href="#" @click.prevent="navigate('home')" class="text-xl font-semibold tracking-tight">A.</a>
+    <a href="#" @click.prevent="navigate('home')" class="text-xl font-semibold tracking-tight">Pasand Rasouli</a>
 
     <nav class="hidden md:flex items-center gap-8 text-sm text-white/60">
       <a href="#" @click.prevent="navigate('home')" class="nav-link transition hover:text-white" :class="{'nav-link-active': currentPage === 'home'}">Home</a>
@@ -87,30 +277,87 @@
 
 <!-- MAIN DYNAMIC CONTENT (Alpine.js SPA) -->
 <main class="pt-28 relative min-h-[calc(100vh-120px)]">
-  <!-- Page transitions with x-show + x-transition -->
-  <div x-show="currentPage === 'home'" x-transition.opacity.duration.300ms class="w-full">
-    <div class="relative overflow-hidden">
-      <div class="glow top-[-200px] left-[-100px]"></div>
-      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center min-h-[85vh]">
-        <div>
-          <div class="mb-6"><span class="text-xs tracking-[0.25em] uppercase text-white/40">Product Designer</span></div>
-          <h1 class="text-5xl md:text-7xl leading-[0.95] font-semibold tracking-[-0.06em] max-w-2xl">
-            I design digital products that feel <span class="gradient-text">effortless.</span>
-          </h1>
-          <p class="mt-8 text-white/50 text-lg leading-relaxed max-w-xl">Product designer focused on crafting modern digital experiences, intuitive interfaces, and scalable design systems.</p>
-          <div class="mt-10 flex items-center gap-4 flex-wrap">
-            <a href="#" @click.prevent="navigate('work')" class="bg-white text-black px-7 py-4 rounded-full font-medium hover:scale-105 transition inline-block">View Work</a>
-            <a href="#" @click.prevent="navigate('about')" class="glass px-7 py-4 rounded-full hover:bg-white/5 transition inline-block">About Me</a>
-          </div>
-        </div>
-        <div class="relative">
-          <div class="glass rounded-[32px] p-6 rotate-3 shadow-2xl">
-            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" class="rounded-2xl w-full h-[650px] object-cover" alt="design showcase">
-          </div>
-        </div>
-      </div>
+<div x-show="currentPage === 'home'" x-transition.opacity.duration.300ms class="w-full relative overflow-hidden min-h-[85vh] flex items-center">
+  <!-- بکگراند ثابت تیره با شیب به سمت سرمه ای (بدون انیمیشن) -->
+  <!-- <div class="absolute inset-0 bg-gradient-to-br from-[#05050A] via-[#0A0A18] to-[#0F0F20]"></div> -->
+  
+  <!-- خط نورانی آهسته -->
+ <div class="soft-glow"></div>
+  
+  <!-- ذرات شناور بسیار محو -->
+<div class="particle w-1 h-1 bg-white-400/40 rounded-full top-[10%] left-[5%] blur-none" style="animation: floatParticle 8s infinite alternate;"></div>
+<div class="particle w-1.5 h-1.5 bg-white-500/30 rounded-full top-[20%] left-[15%] blur-[0.5px]" style="animation: floatParticle 12s infinite alternate-reverse;"></div>
+<div class="particle w-1 h-1 bg-white-400/40 rounded-full top-[30%] left-[25%] blur-none" style="animation: floatParticle 10s infinite alternate;"></div>
+<div class="particle w-2 h-2 bg-white-400/30 rounded-full top-[15%] left-[40%] blur-[0.5px]" style="animation: floatParticle 14s infinite alternate-reverse;"></div>
+<div class="particle w-1 h-1 bg-white-400/40 rounded-full top-[45%] left-[10%] blur-none" style="animation: floatParticle 9s infinite alternate;"></div>
+<div class="particle w-1.5 h-1.5 bg-white-500/35 rounded-full top-[60%] left-[20%] blur-[0.5px]" style="animation: floatParticle 11s infinite alternate-reverse;"></div>
+<div class="particle w-1 h-1 bg-white-400/40 rounded-full top-[75%] left-[35%] blur-none" style="animation: floatParticle 13s infinite alternate;"></div>
+<div class="particle w-2 h-2 bg-white-400/30 rounded-full top-[85%] left-[50%] blur-[0.5px]" style="animation: floatParticle 15s infinite alternate-reverse;"></div>
+<div class="particle w-1 h-1 bg-white-500/40 rounded-full top-[5%] left-[70%] blur-none" style="animation: floatParticle 7s infinite alternate;"></div>
+<div class="particle w-1.5 h-1.5 bg-white-400/35 rounded-full top-[25%] left-[80%] blur-[0.5px]" style="animation: floatParticle 16s infinite alternate-reverse;"></div>
+<div class="particle w-1 h-1 bg-white-500/40 rounded-full top-[50%] left-[90%] blur-none" style="animation: floatParticle 12s infinite alternate;"></div>
+<div class="particle w-2 h-2 bg-white-500/30 rounded-full top-[70%] left-[75%] blur-[0.5px]" style="animation: floatParticle 10s infinite alternate-reverse;"></div>
+<div class="particle w-1 h-1 bg-white-500/40 rounded-full top-[40%] left-[60%] blur-none" style="animation: floatParticle 14s infinite alternate;"></div>
+<div class="particle w-1.5 h-1.5 bg-white-400/35 rounded-full top-[80%] left-[85%] blur-[0.5px]" style="animation: floatParticle 9s infinite alternate-reverse;"></div>
+<div class="particle w-1 h-1 bg-white-400/40 rounded-full top-[10%] left-[95%] blur-none" style="animation: floatParticle 11s infinite alternate;"></div>
+
+  <!-- دایره های محو متعدد (10 عدد با رنگ های خنثی و آبی تیره) -->
+  <!-- <div class="absolute w-[450px] h-[450px] rounded-full bg-white/5 blur-[100px] top-[-150px] left-[-100px] circle-slow"></div> -->
+  <!-- <div class="absolute w-[600px] h-[600px] rounded-full bg-indigo-900/20 blur-[120px] bottom-[-200px] right-[-150px] circle-slower"></div> -->
+  <div class="absolute w-[350px] h-[350px] rounded-full bg-blue-900/15 blur-[90px] top-[30%] left-[20%] circle-slow" style="animation-duration: 28s;"></div>
+  <!-- <div class="absolute w-[500px] h-[500px] rounded-full bg-white/5 blur-[110px] top-[20%] left-[60%] circle-slower" style="animation-duration: 22s;"></div> -->
+  <div class="absolute w-[280px] h-[280px] rounded-full bg-indigo-800/10 blur-[80px] top-[10%] right-[10%] circle-slow" style="animation-duration: 30s;"></div>
+  <div class="absolute w-[380px] h-[380px] rounded-full bg-blue-800/10 blur-[95px] bottom-[10%] left-[20%] circle-slower" style="animation-duration: 26s;"></div>
+  <div class="absolute w-[320px] h-[320px] rounded-full bg-white/10 blur-[85px] top-[45%] right-[25%] circle-slow" style="animation-duration: 24s;"></div>
+  <div class="absolute w-[420px] h-[420px] rounded-full bg-indigo-950/20 blur-[105px] bottom-[30%] right-[40%] circle-slower" style="animation-duration: 32s;"></div>
+  <div class="absolute w-[250px] h-[250px] rounded-full bg-blue-950/10 blur-[75px] top-[75%] left-[45%] circle-slow" style="animation-duration: 27s;"></div>
+  <div class="absolute w-[550px] h-[550px] rounded-full bg-white/5 blur-[130px] top-[20%] right-[-20%] circle-slower" style="animation-duration: 29s;"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+    <span class="inline-block text-xs tracking-[0.25em] uppercase text-white/40 border border-white/10 rounded-full px-4 py-2 mb-8 backdrop-blur-sm">Pasand Rasouli</span>
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-[-0.05em] max-w-5xl mx-auto leading-[1.1]">
+      I design digital products that feel 
+      <span class="gradient-text">effortless.</span>
+    </h1>
+    <p class="mt-8 text-white/50 text-lg md:text-xl max-w-2xl mx-auto">
+      Product designer focused on crafting modern digital experiences, intuitive interfaces, and scalable design systems.
+    </p>
+    <div class="mt-12 flex gap-4 justify-center flex-wrap">
+      <a href="#" @click.prevent="navigate('work')" class="bg-white text-black px-8 py-4 rounded-full font-medium hover:scale-105 transition inline-block shadow-lg">View Work</a>
+      <a href="#" @click.prevent="navigate('about')" class="glass px-8 py-4 rounded-full hover:bg-white/10 transition inline-block backdrop-blur-md">About Me</a>
     </div>
+    <!-- مهارت‌ها کروسل (حرکت از چپ به راست) -->
+<div class="mt-20 marquee-container">
+  <div class="marquee-track">
+    <span class="skill-tag">Figma Mastery</span>
+<span class="skill-tag">Usability Testing</span>
+<span class="skill-tag">Data-Informed Design</span>
+<span class="skill-tag">AI Product Design</span>
+<span class="skill-tag">Accessibility (WCAG)</span>
+<span class="skill-tag">Cross-functional Leadership</span>
+<span class="skill-tag">Survey Design & Data Analysis</span>
+<span class="skill-tag">Competitive & Comparative Analysis</span>
+<span class="skill-tag">Journey Mapping & Service Blueprint</span>
+<span class="skill-tag">Hypothesis-Driven Design</span>
+<span class="skill-tag">OKRs & Success Metrics</span>
+<span class="skill-tag">MVP Definition & Scope Management</span>
+<span class="skill-tag">Micro-interactions & Animation</span>
+<span class="skill-tag">Mentorship & Team Leadership</span>
+    <span class="skill-tag">Design Systems</span>
+    <span class="skill-tag">Product Strategy</span>
+    <span class="skill-tag">User Research</span>
+    <span class="skill-tag">Prototyping</span>
+    <span class="skill-tag">Interaction Design</span>
+    <span class="skill-tag">Visual Design</span>
+    <span class="skill-tag">Design Thinking</span>
+    <span class="skill-tag">Wireframing</span>
+<span class="skill-tag">UX Research</span>
+
+    
   </div>
+</div>
+  </div>
+</div>
 
   <!-- WORK LISTING PAGE -->
   <div x-show="currentPage === 'work'" x-transition.opacity.duration.300ms class="w-full">
@@ -118,9 +365,9 @@
       <div class="flex items-end justify-between mb-14 flex-wrap gap-6">
         <div>
           <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-4">Selected Work</p>
-          <h2 class="text-4xl md:text-6xl font-semibold tracking-tight">Featured Projects</h2>
+          <h2 class="text-4xl md:text-6xl font-semibold tracking-tight mb-4">Featured Projects</h2>
+           <p class="text-white/40 max-w-sm text-base mb-4">A curated selection of product design work across SaaS, fintech, AI, and mobile experiences.</p>
         </div>
-        <p class="text-white/40 max-w-sm text-base">A curated selection of product design work across SaaS, fintech, AI, and mobile experiences.</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8">
@@ -144,72 +391,178 @@
     </div>
   </div>
 
-  <!-- PROJECT DETAIL PAGE -->
-  <div x-show="currentPage === 'project-detail'" x-transition.opacity.duration.300ms class="w-full">
-    <div class="max-w-5xl mx-auto px-6 py-8">
-      <button @click="navigate('work')" class="glass px-5 py-2 rounded-full text-sm flex items-center gap-2 mb-8 hover:bg-white/5 transition">
-        ← Back to all work
-      </button>
+ <!-- PROJECT DETAIL PAGE -->
+<div x-show="currentPage === 'project-detail'" x-transition.opacity.duration.300ms class="w-full">
+  <div class="max-w-5xl mx-auto px-6 py-8">
+    <button @click="navigate('work')" class="glass px-5 py-2 rounded-full text-sm flex items-center gap-2 mb-8 hover:bg-white/5 transition">
+      ← Back to all work
+    </button>
 
-      <div class="glass rounded-3xl overflow-hidden">
-        <img :src="selectedProject?.coverImage" class="w-full h-[450px] object-cover">
-        <div class="p-8 md:p-12">
-          <div class="flex flex-wrap justify-between items-start gap-4 mb-6">
-            <div>
-              <h1 class="text-4xl md:text-5xl font-semibold tracking-tight" x-text="selectedProject?.title"></h1>
-              <p class="text-white/40 mt-2 text-lg" x-text="selectedProject?.category"></p>
-            </div>
-            <div class="bg-white/10 rounded-full px-4 py-2 text-sm">Case Study</div>
+    <div class="glass rounded-3xl overflow-hidden">
+      <img :src="selectedProject?.coverImage" class="w-full h-[450px] object-cover">
+      <div class="p-8 md:p-12">
+        <div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+          <div>
+            <h1 class="text-4xl md:text-5xl font-semibold tracking-tight" x-text="selectedProject?.title"></h1>
+            <p class="text-white/40 mt-2 text-lg" x-text="selectedProject?.category"></p>
           </div>
+        </div>
 
-          <div class="prose prose-invert max-w-none">
-            <p class="text-white/70 text-lg leading-relaxed" x-text="selectedProject?.fullDescription"></p>
-
-            <div class="grid md:grid-cols-2 gap-8 mt-10">
-              <div class="glass rounded-2xl p-6">
-                <h3 class="text-xl font-medium mb-2">Challenge</h3>
-                <p class="text-white/50" x-text="selectedProject?.challenge"></p>
+        <!-- بخش کیس استادی داینامیک -->
+        <div class="prose prose-invert max-w-none">
+          <template x-for="block in selectedProject?.caseStudy" :key="block.type + Math.random()">
+            <div>
+              <!-- بلاک heading -->
+              <div x-if="block.type === 'heading'">
+                <h2 class="text-2xl md:text-3xl font-bold mt-10 mb-4" x-text="block.content"></h2>
               </div>
-              <div class="glass rounded-2xl p-6">
-                <h3 class="text-xl font-medium mb-2">Solution</h3>
-                <p class="text-white/50" x-text="selectedProject?.solution"></p>
+
+              <!-- بلاک متن ساده -->
+              <div x-if="block.type === 'text'">
+                <p class="text-white/70 text-lg leading-relaxed my-6" x-text="block.content"></p>
+              </div>
+
+              <!-- بلاک عکس -->
+              <div x-if="block.type === 'image'">
+                <img :src="block.src" :alt="block.caption" class="rounded-2xl w-full my-8">
+                <p class="text-white/40 text-sm text-center" x-text="block.caption"></p>
+              </div>
+
+              <!-- بلاک دوستونی -->
+              <div x-if="block.type === 'twoColumn'" class="grid md:grid-cols-2 gap-8 my-10">
+                <div class="glass rounded-2xl p-6">
+                  <p x-text="block.left"></p>
+                </div>
+                <div class="glass rounded-2xl p-6">
+                  <p x-text="block.right"></p>
+                </div>
+              </div>
+
+              <!-- بلاک نقل قول -->
+              <div x-if="block.type === 'quote'">
+                <div class="border-l-4 border-white/30 pl-6 my-8 italic text-white/60 text-xl">
+                  <p x-text="block.content"></p>
+                  <p class="text-sm text-white/40 mt-2" x-text="'— ' + block.author"></p>
+                </div>
+              </div>
+
+              <!-- بلاک جدول نتایج -->
+              <div x-if="block.type === 'resultsTable'">
+                <div class="bg-white/5 rounded-2xl p-6 my-8">
+                  <h3 class="text-xl font-semibold mb-4">Key Results</h3>
+                  <ul class="list-disc list-inside space-y-2 text-white/70">
+                    <template x-for="item in block.items">
+                      <li x-text="item"></li>
+                    </template>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- بلاک ویدئو (YouTube/Vimeo) -->
+              <div x-if="block.type === 'video'">
+                <div class="aspect-video my-8">
+                  <iframe :src="block.embedUrl" class="w-full h-full rounded-2xl" frameborder="0" allowfullscreen></iframe>
+                </div>
               </div>
             </div>
+          </template>
+        </div>
 
-            <div class="mt-10">
-              <h3 class="text-2xl font-medium mb-4">Key results</h3>
-              <ul class="list-disc list-inside text-white/60 space-y-2">
-                <template x-for="result in selectedProject?.results">
-                  <li x-text="result"></li>
-                </template>
-              </ul>
+        <!-- اگر caseStudy وجود نداشت، همان challenge/solution/results قبلی را نشان بده (برای پروژه‌های قدیمی) -->
+        <div x-if="!selectedProject?.caseStudy">
+          <div class="grid md:grid-cols-2 gap-8 mt-10">
+            <div class="glass rounded-2xl p-6">
+              <h3 class="text-xl font-medium mb-2">Challenge</h3>
+              <p class="text-white/50" x-text="selectedProject?.challenge"></p>
             </div>
+            <div class="glass rounded-2xl p-6">
+              <h3 class="text-xl font-medium mb-2">Solution</h3>
+              <p class="text-white/50" x-text="selectedProject?.solution"></p>
+            </div>
+          </div>
+          <div class="mt-10">
+            <h3 class="text-2xl font-medium mb-4">Key results</h3>
+            <ul class="list-disc list-inside text-white/60 space-y-2">
+              <template x-for="result in selectedProject?.results">
+                <li x-text="result"></li>
+              </template>
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <!-- ABOUT PAGE -->
-  <div x-show="currentPage === 'about'" x-transition.opacity.duration.300ms class="w-full">
-    <div class="max-w-7xl mx-auto px-6 py-8">
-      <div class="grid lg:grid-cols-2 gap-20 items-start">
-        <div>
-          <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-5">About</p>
-          <h2 class="text-5xl font-semibold tracking-tight leading-tight">Building thoughtful experiences through clarity and systems thinking.</h2>
-        </div>
-        <div>
-          <p class="text-white/50 text-lg leading-relaxed">I'm a product designer focused on simplifying complexity through clean UX and scalable UI systems. I enjoy turning product strategy into interfaces that feel intuitive, fast, and visually refined.</p>
-          <div class="grid grid-cols-2 gap-6 mt-12">
-            <div class="glass rounded-3xl p-8"><h3 class="text-4xl font-semibold">5+</h3><p class="text-white/40 mt-2">Years Experience</p></div>
-            <div class="glass rounded-3xl p-8"><h3 class="text-4xl font-semibold">30+</h3><p class="text-white/40 mt-2">Projects Designed</p></div>
-            <div class="glass rounded-3xl p-8"><h3 class="text-4xl font-semibold">10+</h3><p class="text-white/40 mt-2">Design Systems</p></div>
-            <div class="glass rounded-3xl p-8"><h3 class="text-4xl font-semibold">∞</h3><p class="text-white/40 mt-2">Curiosity</p></div>
-          </div>
+<!-- ABOUT PAGE با تصویر پروفایل دایره‌ای -->
+<div x-show="currentPage === 'about'" x-transition.opacity.duration.300ms class="w-full">
+  <div class="max-w-5xl mx-auto px-6 py-12 md:py-20">
+    
+    <!-- هدر با تصویر پروفایل و عنوان بزرگ -->
+    <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start mb-16">
+      <!-- تصویر پروفایل (دایره‌ای کوچک) -->
+      <div class="shrink-0">
+        <img src="./assets/images/Profile.jpeg" 
+             alt="Pasand Rasouli"
+             class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-2 border-white/20 shadow-lg">
+      </div>
+      
+      <!-- عنوان و زیرعنوان -->
+      <div class="text-center md:text-left">
+        <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-2">About Me</p>
+        <h2 class="text-3xl md:text-5xl font-semibold tracking-tight leading-tight">
+          Designing with purpose,<br> building with empathy.
+        </h2>
+        <div class="mt-3 max-w-md">
+          <p class="text-white/40 text-base">Over 8 years of shaping digital products from concept to launch.</p>
         </div>
       </div>
     </div>
+
+    <!-- متن اصلی بلند (افقی و خواناتر) -->
+    <div class="prose prose-invert max-w-none">
+      <div class="space-y-6 text-white/60 text-lg leading-relaxed">
+        <p>
+          I'm Pasand Rasouli, a product designer who believes that great design is invisible, it just feels right. My journey started in game industry, but I quickly fell in love with the problem solving nature of product design. I've since helped startups and enterprises create intuitive, impactful digital experiences.
+        </p>
+        <p>
+          My approach combines user research, systems thinking, and a dash of creativity. I don't just design screens; I design workflows, design systems, and cross-functional collaboration. I thrive in environments where I can work closely with product managers and engineers to ship products that people genuinely enjoy using.
+        </p>
+        <p>
+          Outside of work, I'm obsessed with typography, open-source tools, and mentoring junior designers. I also love exploring how AI can augment our design process, without losing the human touch.
+        </p>
+        <p>
+          Currently, I'm available for freelance projects, design system consultancy, or full-time opportunities. Let's build something remarkable together.
+        </p>
+      </div>
+    </div>
+
+    <!-- آمارها در یک ردیف سه‌تایی -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 border-t border-white/10 pt-12">
+      <div class="text-center">
+        <div class="text-4xl font-semibold text-white">8+</div>
+        <div class="text-white/40 text-sm mt-1">Years experience</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-semibold text-white">30+</div>
+        <div class="text-white/40 text-sm mt-1">Projects shipped</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-semibold text-white">6+</div>
+        <div class="text-white/40 text-sm mt-1">Design systems</div>
+      </div>
+    </div>
+
+    <!-- نقل قول / callout شیشه‌ای -->
+    <div class="mt-16 glass rounded-2xl p-8 text-center">
+      <p class="text-white/70 italic text-lg">
+        “The best products are born from empathy and iteration. I bring both to every project.”
+      </p>
+      <p class="text-white/30 text-sm mt-3"> Pasand Rasouli</p>
+    </div>
   </div>
+</div>
 
   <!-- PROCESS PAGE -->
   <div x-show="currentPage === 'process'" x-transition.opacity.duration.300ms class="w-full">
@@ -228,91 +581,69 @@
   </div>
 
   <!-- CONTACT PAGE -->
-  <div x-show="currentPage === 'contact'" x-transition.opacity.duration.300ms class="w-full">
-    <div class="relative overflow-hidden py-12">
-      <div class="glow bottom-[-100px] right-[-100px]"></div>
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-6">Contact</p>
-        <h2 class="text-5xl md:text-7xl font-semibold tracking-tight leading-[1.1]">Let's create something exceptional.</h2>
-        <p class="text-white/50 text-lg mt-8 max-w-2xl mx-auto leading-relaxed">Open to freelance projects, product collaborations, and full-time opportunities.</p>
-        <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
-          <a href="mailto:hello@example.com" class="bg-white text-black px-8 py-4 rounded-full font-medium hover:scale-105 transition">hello@example.com</a>
-          <a href="#" @click.prevent="navigate('contact')" class="glass px-8 py-4 rounded-full hover:bg-white/5 transition">LinkedIn</a>
-          <a href="#" @click.prevent="navigate('contact')" class="glass px-8 py-4 rounded-full hover:bg-white/5 transition">Dribbble</a>
-        </div>
+<div x-show="currentPage === 'contact'" x-transition.opacity.duration.300ms class="w-full">
+  <div class="relative overflow-hidden py-12">
+    <div class="glow bottom-[-100px] right-[-100px]"></div>
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-6">Contact</p>
+      <h2 class="text-5xl md:text-7xl font-semibold tracking-tight leading-[1.1]">Let's create something exceptional.</h2>
+      <p class="text-white/50 text-lg mt-8 max-w-2xl mx-auto leading-relaxed">Open to freelance projects, product collaborations, and full-time opportunities.</p>
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
+        <!-- Email (Heroicon outline) -->
+        <a href="mailto:pasand.rasouli@gmail.com" class="bg-white text-black px-8 py-4 rounded-full font-medium hover:scale-105 transition inline-flex items-center gap-2">
+          pasand.rasouli@gmail.com
+        </a>
+        <!-- Phone (Heroicon outline) -->
+        <a href="tel:+989045643425" class="glass px-8 py-4 rounded-full hover:bg-white/5 transition inline-flex items-center gap-2">
+          +98 904 564 3425
+        </a>
+        <!-- LinkedIn (Heroicon brand – using simple solid from Heroicons v2?) -->
+        <a href="https://linkedin.com/in/pasand-rasouli" target="_blank" class="glass px-8 py-4 rounded-full hover:bg-white/5 transition inline-flex items-center gap-2">
+          LinkedIn
+        </a>
+        <!-- Behance (official logo as clean SVG) -->
+        <a href="https://behance.net/pasandrasouli" target="_blank" class="glass px-8 py-4 rounded-full hover:bg-white/5 transition inline-flex items-center gap-2">
+          Behance
+        </a>
       </div>
     </div>
   </div>
+</div>
 </main>
 
 <!-- FOOTER -->
 <footer class="border-t border-white/5 py-8 mt-12">
   <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-white/30">
-    <p>© 2026 Aria Chen. All rights reserved.</p>
+    <p>© 2026 Pasand Rasouli. All rights reserved.</p>
     <div class="flex items-center gap-6">
-      <a href="#" @click.prevent="navigate('contact')" class="hover:text-white transition">Twitter</a>
+      <!-- <a href="#" @click.prevent="navigate('contact')" class="hover:text-white transition">Twitter</a> -->
       <a href="#" @click.prevent="navigate('contact')" class="hover:text-white transition">LinkedIn</a>
       <a href="#" @click.prevent="navigate('contact')" class="hover:text-white transition">Behance</a>
     </div>
   </div>
 </footer>
-
+<div id="glassCursor" class="glass-cursor"></div>
 <script>
   function app() {
     return {
-      currentPage: 'home',     // home, work, project-detail, about, process, contact
+      currentPage: 'home',
       selectedProjectId: null,
-      projects: [
-        {
-          id: 1,
-          title: 'Fintech Dashboard',
-          category: 'Product Design • SaaS',
-          coverImage: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?q=80&w=1200&auto=format&fit=crop',
-          fullDescription: 'A next-gen financial analytics dashboard that consolidates real-time data, giving users a clear overview of investments, spending, and forecasting. Designed for speed and clarity.',
-          challenge: 'Users were overwhelmed with complex data tables and slow performance. The goal was to simplify without losing depth.',
-          solution: 'We built a modular dashboard with predictive widgets, dark/light mode, and intelligent defaults. Reduced load times by 40%.',
-          results: ['40% faster data retrieval', '85% user satisfaction increase', 'Adopted by 3 major fintech partners']
-        },
-        {
-          id: 2,
-          title: 'AI Productivity App',
-          category: 'UX Strategy • Mobile',
-          coverImage: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop',
-          fullDescription: 'An AI-powered to-do and focus assistant that learns user habits and suggests optimal workflows. Seamless cross-platform experience.',
-          challenge: 'Users felt overwhelmed by traditional task managers. The app needed to feel proactive, not reactive.',
-          solution: 'Designed an adaptive interface with contextual AI prompts, gamified focus sessions, and natural language input.',
-          results: ['42% higher task completion', '4.8⭐ on App Store', 'Acquired 50k+ monthly active users']
-        },
-        {
-          id: 3,
-          title: 'Analytics Platform',
-          category: 'Dashboard UX • Web App',
-          coverImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
-          fullDescription: 'Enterprise-grade analytics platform with customizable reports, real-time collaboration, and interactive data visualizations.',
-          challenge: 'Complex datasets required an intuitive filtering system. Existing tools were too rigid.',
-          solution: 'Created a flexible drag-and-drop report builder, real-time sync, and role-based views.',
-          results: ['Reduced setup time by 60%', 'Loved by data teams', 'Scaled to 200+ companies']
-        },
-        {
-          id: 4,
-          title: 'Design System',
-          category: 'UI Infrastructure',
-          coverImage: 'https://images.unsplash.com/photo-1516321165247-4aa89a48be28?q=80&w=1200&auto=format&fit=crop',
-          fullDescription: 'A comprehensive design system with components, tokens, and documentation used across 8 product teams to ensure consistency.',
-          challenge: 'Inconsistent UI across teams led to poor user experience and wasted development time.',
-          solution: 'Built a modular system with Figma library and Storybook, including dark mode and accessibility-first components.',
-          results: ['50% faster design-dev handoff', '100% accessibility compliance', 'Adopted company-wide']
-        }
-      ],
+      projects: [],
+      
       get selectedProject() {
         if (!this.selectedProjectId) return null;
         return this.projects.find(p => p.id === this.selectedProjectId);
       },
+      
+      async loadProjects() {
+        const response = await fetch('projects.json');
+        this.projects = await response.json();
+      },
+      
       navigate(page, projectId = null) {
         if (page === 'project-detail' && projectId) {
           this.selectedProjectId = projectId;
           this.currentPage = 'project-detail';
-          // update browser hash
           window.location.hash = `project/${projectId}`;
         } else if (page === 'work') {
           this.currentPage = 'work';
@@ -331,16 +662,178 @@
           this.currentPage = 'contact';
           window.location.hash = 'contact';
         }
-        // scroll to top on navigation
         window.scrollTo({ top: 0, behavior: 'smooth' });
       },
+      
       openProjectDetail(id) {
         this.navigate('project-detail', id);
       },
+      
+     initCustomCursor() {
+  const cursor = document.getElementById('glassCursor');
+  if (!cursor) return;
+  
+  // ایجاد canvas برای مگنیفای
+  let magnifyCanvas = document.createElement('canvas');
+  magnifyCanvas.width = 120;
+  magnifyCanvas.height = 120;
+  magnifyCanvas.style.width = '120px';
+  magnifyCanvas.style.height = '120px';
+  magnifyCanvas.style.borderRadius = '50%';
+  magnifyCanvas.style.position = 'absolute';
+  magnifyCanvas.style.top = '0';
+  magnifyCanvas.style.left = '0';
+  magnifyCanvas.style.pointerEvents = 'none';
+  cursor.appendChild(magnifyCanvas);
+  let ctx = magnifyCanvas.getContext('2d');
+  
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+  let isInHero = false;
+  let magnifyActive = false;
+  let heroSection = null;
+  let animationId = null;
+  
+  // حرکت نرم
+  const updatePosition = () => {
+    const dx = mouseX - cursorX;
+    const dy = mouseY - cursorY;
+    cursorX += dx * 0.12;
+    cursorY += dy * 0.12;
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
+    
+    // اگر حالت مگنیفای فعال است، canvas را آپدیت کن
+    if (magnifyActive && heroSection && ctx) {
+      try {
+        // گرفتن ناحیه اطراف موس از صفحه
+        const zoomFactor = 2;
+        const size = 120;
+        const half = size / 2;
+        const sx = mouseX - half / zoomFactor;
+        const sy = mouseY - half / zoomFactor;
+        // رسم تصویر بزرگ‌شده
+        ctx.clearRect(0, 0, size, size);
+        ctx.drawImage(
+          heroSection,
+          sx, sy, size / zoomFactor, size / zoomFactor,
+          0, 0, size, size
+        );
+        // اضافه کردن خطوط ضربدری
+        ctx.beginPath();
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 1;
+        ctx.moveTo(size/2, 0);
+        ctx.lineTo(size/2, size);
+        ctx.moveTo(0, size/2);
+        ctx.lineTo(size, size/2);
+        ctx.stroke();
+      } catch(e) { /* نادیده گرفته شود */ }
+    }
+    
+    requestAnimationFrame(updatePosition);
+  };
+  updatePosition();
+  
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+  
+  const enableMagnify = (target) => {
+    if (!target) return;
+    magnifyActive = true;
+    cursor.classList.add('magnify');
+    cursor.classList.remove('hover'); // استایل معمولی هاور حذف شود
+    magnifyCanvas.style.display = 'block';
+    // اطمینان از وجود heroSection
+    if (!heroSection) heroSection = document.querySelector('[x-show="currentPage === \'home\'"]');
+  };
+  
+  const disableMagnify = () => {
+    magnifyActive = false;
+    cursor.classList.remove('magnify');
+    magnifyCanvas.style.display = 'none';
+    ctx.clearRect(0, 0, 120, 120);
+  };
+  
+  const enableCursor = () => {
+    isInHero = true;
+    cursor.classList.add('active');
+    document.body.style.cursor = 'none';
+    heroSection = document.querySelector('[x-show="currentPage === \'home\'"]');
+    if (heroSection) heroSection.style.cursor = 'none';
+  };
+  
+  const disableCursor = () => {
+    isInHero = false;
+    cursor.classList.remove('active');
+    document.body.style.cursor = '';
+    if (heroSection) heroSection.style.cursor = '';
+    cursor.classList.remove('hover', 'magnify', 'click');
+    disableMagnify();
+  };
+  
+  const attachHeroEvents = (hero) => {
+    // اهداف مگنیفای: نوشته بزرگ h1 و دکمه‌ها
+    const magnifyTargets = hero.querySelectorAll('h1, .gradient-text, .bg-white, .glass');
+    magnifyTargets.forEach(el => {
+      el.addEventListener('mouseenter', () => enableMagnify(el));
+      el.addEventListener('mouseleave', () => disableMagnify());
+      el.addEventListener('mousedown', () => {
+        cursor.classList.add('click');
+        el.addEventListener('mouseup', () => cursor.classList.remove('click'), { once: true });
+      });
+    });
+    // سایر المان‌های تعاملی فقط هاور معمولی (بزرگ شدن حباب)
+    const normalTargets = hero.querySelectorAll('a, button, [role="button"]');
+    normalTargets.forEach(el => {
+      if (!el.closest('h1')) { // جلوگیری از تداخل
+        el.addEventListener('mouseenter', () => {
+          if (!magnifyActive) cursor.classList.add('hover');
+        });
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        el.addEventListener('mousedown', () => {
+          cursor.classList.add('click');
+          el.addEventListener('mouseup', () => cursor.classList.remove('click'), { once: true });
+        });
+      }
+    });
+  };
+  
+  const observer = new MutationObserver(() => {
+    if (this.currentPage === 'home') {
+      setTimeout(() => {
+        const newHero = document.querySelector('[x-show="currentPage === \'home\'"]');
+        if (newHero && !isInHero) {
+          enableCursor();
+          attachHeroEvents(newHero);
+        }
+      }, 50);
+    } else {
+      if (isInHero) disableCursor();
+    }
+  });
+  
+  observer.observe(document.querySelector('main'), { attributes: true, childList: true, subtree: false });
+  
+  if (this.currentPage === 'home') {
+    setTimeout(() => {
+      const hero = document.querySelector('[x-show="currentPage === \'home\'"]');
+      if (hero) {
+        enableCursor();
+        attachHeroEvents(hero);
+      }
+    }, 100);
+  }
+},
+      
       initRouter() {
-        // handle initial hash and back/forward
+        this.initCustomCursor();
+        this.loadProjects();
+        
         const handleHash = () => {
-          const hash = window.location.hash.slice(1); // remove '#'
+          const hash = window.location.hash.slice(1);
           if (hash.startsWith('project/')) {
             const id = parseInt(hash.split('/')[1]);
             if (id && this.projects.find(p => p.id === id)) {
@@ -359,8 +852,9 @@
           }
           this.selectedProjectId = null;
         };
+        
         window.addEventListener('hashchange', handleHash);
-        handleHash(); // initial call
+        handleHash();
       }
     };
   }
