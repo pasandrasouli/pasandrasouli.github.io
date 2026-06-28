@@ -1,16 +1,17 @@
 [
+
   {
     "id": 1,
-    "title": "Fintech Dashboard",
-    "category": "Product Design • SaaS",
-    "coverImage": "https://images.unsplash.com/photo-1558655146-9f40138edfeb?q=80&w=1200&auto=format&fit=crop",
-    "fullDescription": "A next-gen financial analytics dashboard that consolidates real-time data, giving users a clear overview of investments, spending, and forecasting. Designed for speed and clarity.",
+    "title": "TrendyBee",
+    "category": "Product Design Process Case Study • AI",
+    "coverImage": "./assets/images/Cover/trendybee.png",
+    "fullDescription": "Trendy Bee is an intelligent content creation tool that I designed from scratch. Through problem framing, three distinct needs were discovered: trend discovery, idea-to-script conversion, and pre-publish video analysis. 4 Job Stories were defined, pain points were prioritized, and 4 key trade-offs were made. User flows include both the full path (trend → brainstorm) and quick path. The product is currently under development.s",
     "challenge": "Users were overwhelmed with complex data tables and slow performance. The goal was to simplify without losing depth.",
     "solution": "We built a modular dashboard with predictive widgets, dark/light mode, and intelligent defaults. Reduced load times by 40%.",
     "results": ["40% faster data retrieval", "85% user satisfaction increase", "Adopted by 3 major fintech partners"],
     "caseStudy": [
-    { "type": "heading", "content": "Understanding the problem" },
-    { "type": "text", "content": "کاربران از دیتاهای پیچیده خسته شده بودن..." },
+    { "type": "heading", "content": "Product Statement" },
+    { "type": "text", "content": "Trendy Bee is an intelligent content creation tool that I designed from scratch. Through problem framing, three distinct needs were discovered: trend discovery, idea-to-script conversion, and pre-publish video analysis. 4 Job Stories were defined, pain points were prioritized, and 4 key trade-offs were made. User flows include both the full path (trend → brainstorm) and quick path. The product is currently under development." },
     { "type": "image", "src": "https://...", "caption": "تحلیل اولیه" },
     { "type": "heading", "content": "راه‌حل پیشنهادی" },
     { "type": "twoColumn", "left": "متن سمت چپ", "right": "متن سمت راست" },
@@ -23,7 +24,7 @@
     "id": 2,
     "title": "AI Productivity App",
     "category": "UX Strategy • Mobile",
-    "coverImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop",
+    "coverImage": "./assets/images/Cover/medicine.png",
     "fullDescription": "An AI-powered to-do and focus assistant that learns user habits and suggests optimal workflows. Seamless cross-platform experience.",
     "challenge": "Users felt overwhelmed by traditional task managers. The app needed to feel proactive, not reactive.",
     "solution": "Designed an adaptive interface with contextual AI prompts, gamified focus sessions, and natural language input.",
