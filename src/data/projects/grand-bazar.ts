@@ -58,8 +58,8 @@ export const grandBazar: Project = {
 
     { type: "image", caption: "My Role", src: "./assets/images/Grandbazar/MyRole.png" },
 
-    { type: "image", caption: "Design Thinking Process", src: "./public/assets/images/Grandbazar/DesignThinkingProcess.png" },
-    { type: "image", caption: "Project Timeline", src: "./public/assets/images/Grandbazar/ProjectTimeline.png" },
+    { type: "image", caption: "Design Thinking Process", src: "./assets/images/Grandbazar/DesignThinkingProcess.png" },
+    { type: "image", caption: "Project Timeline", src: "./assets/images/Grandbazar/ProjectTimeline.png" },
 
     {
       type: "withBullet",
@@ -94,11 +94,11 @@ export const grandBazar: Project = {
       title: "Quantitative Research",
       description: " To validate the patterns observed in user interviews, we conducted a survey with 150+ participants who were active credit users. The goal was to gather measurable data on user behavior, pain points, and expectations."
     },
-    { type: "image", caption: "Quantitative Research", src: "./public/assets/images/Grandbazar/QuantitativeResearch.png" },
+    { type: "image", caption: "Quantitative Research", src: "./assets/images/Grandbazar/QuantitativeResearch.png" },
 
-    { type: "image", caption: "Information Architecture", src: "./public/assets/images/Grandbazar/UserPersona.png" },
-    { type: "image", caption: "Typography & Colors", src: "./public/assets/images/Grandbazar/Typography&Colors.png" },
-    { type: "image", caption: "High-Fidelity Wireframes", src: "./public/assets/images/Grandbazar/HighFidelityWireframes.png" },
+    { type: "image", caption: "Information Architecture", src: "./assets/images/Grandbazar/UserPersona.png" },
+    { type: "image", caption: "Typography & Colors", src: "./assets/images/Grandbazar/Typography&Colors.png" },
+    { type: "image", caption: "High-Fidelity Wireframes", src: "./assets/images/Grandbazar/HighFidelityWireframes.png" },
 
   ]
 }
