@@ -1,8 +1,8 @@
 import { Project } from "../../types";
 
-export const grandBazar: Project = {
-  id: 2,
-  title: "",
+export const cryptoTraderHub: Project = {
+  id: 6,
+  title: "Crypto Trader Hub",
   category: "",
   coverImage: "",
   fullDescription: "",

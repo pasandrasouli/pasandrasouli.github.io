@@ -1,7 +1,7 @@
 import { Project } from "../../types";
 
-export const grandBazar: Project = {
-  id: 2,
+export const oms: Project = {
+  id: 4,
   title: "",
   category: "",
   coverImage: "",
