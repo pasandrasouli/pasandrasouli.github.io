@@ -8,8 +8,8 @@ import { cryptoTraderHub } from "./projects/crypto-trader-hub";
 
 export const projects: Project[] = [
   trendyBee,
-  grandBazar,
   medicineReminder,
+  grandBazar,
   oms,
   omsXanis,
   cryptoTraderHub
