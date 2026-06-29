@@ -1,11 +1,29 @@
-# Development
+# Pasand Rasouli Portfolio
 
-## Dev server
+Vue + Vite + TypeScript portfolio site.
+
+## Development
+
 ```bash
-python -m http.server
+pnpm install
+pnpm dev
 ```
 
-## Commit and push
+## Quality checks
+
 ```bash
-git commit -am "msg" && git push
+pnpm typecheck
+pnpm lint
+pnpm build
+pnpm preview
 ```
+
+## Deployment
+
+The repo includes a GitHub Actions workflow that typechecks, builds, and deploys `dist/` to GitHub Pages.
+
+## Project data
+
+Edit project content in [`src/data/projects.json`](src/data/projects.json).
+
+Static assets go in [`public/assets/`](public/assets/).
