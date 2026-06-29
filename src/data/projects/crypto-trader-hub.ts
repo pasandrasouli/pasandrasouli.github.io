@@ -7,5 +7,7 @@ export const cryptoTraderHub: Project = {
   coverImage: "./public/assets/images/Cover/tradehub.png",
   fullDescription: "",
   results: [],
-  caseStudy: [],
+  caseStudy: [{
+    type:"image",src:"./assets/images/CryptoTradeHub.png"
+  }],
 }
