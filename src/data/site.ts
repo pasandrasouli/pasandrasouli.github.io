@@ -9,7 +9,6 @@ export const site: SiteContent = {
     { page: 'home', label: 'Home' },
     { page: 'work', label: 'Work' },
     { page: 'about', label: 'About' },
-    { page: 'process', label: 'Process' },
     { page: 'contact', label: 'Contact' },
   ],
   ctaLabel: "Let's Talk",
@@ -70,32 +69,6 @@ export const site: SiteContent = {
       text: 'The best products are born from empathy and iteration. I bring both to every project.',
       author: 'Pasand Rasouli',
     },
-  },
-  process: {
-    eyebrow: 'Process',
-    title: 'How I work',
-    steps: [
-      {
-        number: '01',
-        title: 'Discover',
-        description: 'Understanding users, business goals, and product constraints.',
-      },
-      {
-        number: '02',
-        title: 'Define',
-        description: 'Clarifying flows, priorities, and UX direction.',
-      },
-      {
-        number: '03',
-        title: 'Design',
-        description: 'Crafting polished interfaces and scalable systems.',
-      },
-      {
-        number: '04',
-        title: 'Deliver',
-        description: 'Collaborating closely with developers for execution.',
-      },
-    ],
   },
   contact: {
     eyebrow: 'Contact',

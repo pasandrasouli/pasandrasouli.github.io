@@ -1,4 +1,4 @@
-export type Page = 'home' | 'work' | 'project-detail' | 'about' | 'process' | 'contact'
+export type Page = 'home' | 'work' | 'project-detail' | 'about' | 'contact'
 
 export interface NavItem {
   page: Page
@@ -46,18 +46,6 @@ export interface AboutContent {
   quote: Quote
 }
 
-export interface ProcessStep {
-  number: string
-  title: string
-  description: string
-}
-
-export interface ProcessContent {
-  eyebrow: string
-  title: string
-  steps: ProcessStep[]
-}
-
 export interface ContactContent {
   eyebrow: string
   title: string
@@ -84,7 +72,6 @@ export interface SiteContent {
   ctaLabel: string
   home: HomeContent
   about: AboutContent
-  process: ProcessContent
   contact: ContactContent
   work: WorkContent
   projectDetail: ProjectDetailContent

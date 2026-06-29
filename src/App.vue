@@ -10,7 +10,6 @@ import HomePage from './components/HomePage.vue'
 import WorkPage from './components/WorkPage.vue'
 import ProjectDetailPage from './components/ProjectDetailPage.vue'
 import AboutPage from './components/AboutPage.vue'
-import ProcessPage from './components/ProcessPage.vue'
 import ContactPage from './components/ContactPage.vue'
 
 const currentPage = ref<Page>('home')
@@ -34,7 +33,6 @@ function updateDocumentTitle() {
     home: SITE_TITLE,
     work: `Work — ${SITE_TITLE}`,
     about: `About — ${SITE_TITLE}`,
-    process: `Process — ${SITE_TITLE}`,
     contact: `Contact — ${SITE_TITLE}`,
   }
 
@@ -56,9 +54,6 @@ function navigate(page: Page, projectId: number | null = null) {
   } else if (page === 'about') {
     currentPage.value = 'about'
     window.location.hash = 'about'
-  } else if (page === 'process') {
-    currentPage.value = 'process'
-    window.location.hash = 'process'
   } else if (page === 'contact') {
     currentPage.value = 'contact'
     window.location.hash = 'contact'
@@ -86,9 +81,6 @@ function handleHash() {
       break
     case 'about':
       currentPage.value = 'about'
-      break
-    case 'process':
-      currentPage.value = 'process'
       break
     case 'contact':
       currentPage.value = 'contact'
@@ -139,7 +131,6 @@ onBeforeUnmount(() => {
           @open-project="openProjectDetail"
         />
         <AboutPage v-else-if="currentPage === 'about'" key="about" />
-        <ProcessPage v-else-if="currentPage === 'process'" key="process" />
         <ContactPage v-else-if="currentPage === 'contact'" key="contact" />
       </Transition>
     </main>
