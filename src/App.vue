@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
-import {projects} from './data/projects'
+import { projects } from './data/projects'
 import { useGlassCursor } from './composables/useGlassCursor'
 import { SITE_TITLE } from './constants'
 import type { Page } from './types'

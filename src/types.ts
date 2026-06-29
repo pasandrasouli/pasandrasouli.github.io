@@ -121,12 +121,12 @@ export type CaseStudyBlock =
       embedUrl: string
     }
   | {
-      type: 'withBullet',
-      title: string,
+      type: 'withBullet'
+      title: string
       titleGroups: {
-        subTitle: string,
-        description: string,
-      }[],
+        subTitle: string
+        description: string
+      }[]
       items: string[]
     }
 
