@@ -1,42 +1,18 @@
 <script setup lang="ts">
 import type { Page } from '../types'
+import { site } from '../data/site'
 
 const emit = defineEmits<{
   navigate: [page: Page]
 }>()
-
-
-const skills = [
-  'Figma Mastery',
-  'Usability Testing',
-  'Data-Informed Design',
-  'AI Product Design',
-  'Accessibility (WCAG)',
-  'Cross-functional Leadership',
-  'Survey Design & Data Analysis',
-  'Competitive & Comparative Analysis',
-  'Journey Mapping & Service Blueprint',
-  'Hypothesis-Driven Design',
-  'OKRs & Success Metrics',
-  'MVP Definition & Scope Management',
-  'Micro-interactions & Animation',
-  'Mentorship & Team Leadership',
-  'Design Systems',
-  'Product Strategy',
-  'User Research',
-  'Prototyping',
-  'Interaction Design',
-  'Visual Design',
-  'Design Thinking',
-  'Wireframing',
-  'UX Research',
-] as const
 
 type Particle = {
   id: string
   className: string
   style: string
 }
+
+const content = site.home
 
 const particles: Particle[] = [
   { id: 'p1', className: 'particle w-1 h-1 bg-white-400/40 rounded-full top-[10%] left-[5%] blur-none', style: 'animation: floatParticle 8s infinite alternate;' },
@@ -84,23 +60,31 @@ function nav(page: Page) {
     <div class="absolute w-[550px] h-[550px] rounded-full bg-white/5 blur-[130px] top-[20%] right-[-20%] circle-slower" style="animation-duration: 29s;"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-      <span class="inline-block text-xs tracking-[0.25em] uppercase text-white/40 border border-white/10 rounded-full px-4 py-2 mb-8 backdrop-blur-sm">Pasand Rasouli</span>
+      <span class="inline-block text-xs tracking-[0.25em] uppercase text-white/40 border border-white/10 rounded-full px-4 py-2 mb-8 backdrop-blur-sm">{{ content.badge }}</span>
       <h1 class="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-[-0.05em] max-w-5xl mx-auto leading-[1.1]">
-        I design digital products that feel
-        <span class="gradient-text">effortless.</span>
+        {{ content.titlePrefix }}
+        <span class="gradient-text">{{ content.titleHighlight }}</span>
       </h1>
       <p class="mt-8 text-white/50 text-lg md:text-xl max-w-2xl mx-auto">
-        Product designer focused on crafting modern digital experiences, intuitive interfaces, and scalable design systems.
+        {{ content.description }}
       </p>
       <div class="mt-12 flex gap-4 justify-center flex-wrap">
-        <a href="#work" @click.prevent="nav('work')" class="bg-white text-black px-8 py-4 rounded-full font-medium hover:scale-105 transition inline-block shadow-lg">View Work</a>
-        <a href="#about" @click.prevent="nav('about')" class="glass px-8 py-4 rounded-full hover:bg-white/10 transition inline-block backdrop-blur-md">About Me</a>
+        <a
+          v-for="cta in content.ctas"
+          :key="cta.page"
+          :href="`#${cta.page}`"
+          @click.prevent="nav(cta.page)"
+          class="px-8 py-4 rounded-full transition inline-block"
+          :class="cta.page === 'work' ? 'bg-white text-black font-medium hover:scale-105 shadow-lg' : 'glass hover:bg-white/10 backdrop-blur-md'"
+        >
+          {{ cta.label }}
+        </a>
       </div>
 
       <div class="mt-20 marquee-container">
         <div class="marquee-track">
-          <span v-for="skill in skills" :key="skill" class="skill-tag">{{ skill }}</span>
-          <span v-for="skill in skills" :key="`dup-${skill}`" class="skill-tag">{{ skill }}</span>
+          <span v-for="skill in content.skills" :key="skill" class="skill-tag">{{ skill }}</span>
+          <span v-for="skill in content.skills" :key="`dup-${skill}`" class="skill-tag">{{ skill }}</span>
         </div>
       </div>
     </div>

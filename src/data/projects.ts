@@ -1,17 +1,19 @@
-[
+import { Project } from "../types";
 
+export const projects: Project[] = [
   {
-    "id": 1,
-    "title": "TrendyBee",
-    "category": "Product Design Process Case Study • AI",
-    "coverImage": "/assets/images/Cover/trendybee.png",
-    "fullDescription": "Trendy Bee is an intelligent content creation tool that I designed from scratch. Through problem framing, three distinct needs were discovered: trend discovery, idea-to-script conversion, and pre-publish video analysis.",
-    "challenge": "Users were overwhelmed with complex data tables and slow performance. The goal was to simplify without losing depth.",
-    "solution": "We built a modular dashboard with predictive widgets, dark/light mode, and intelligent defaults. Reduced load times by 40%.",
-    "results": ["40% faster data retrieval", "85% user satisfaction increase", "Adopted by 3 major fintech partners"],
-    "caseStudy": [
+    id: 1,
+    title: "TrendyBee",
+    category: "Product Design Process Case Study • AI",
+    coverImage: "/assets/images/Cover/trendybee.png",
+    images: ["/assets/images/TrendyBee/1.png", "/assets/images/TrendyBee/2.png", "/assets/images/TrendyBee/3.png", "/assets/images/TrendyBee/4.png", "/assets/images/TrendyBee/5.png", "/assets/images/TrendyBee/6.png", "/assets/images/TrendyBee/7.png", "/assets/images/TrendyBee/8.png", "/assets/images/TrendyBee/9.png", "/assets/images/TrendyBee/10.png"],
+    fullDescription: "Trendy Bee is an intelligent content creation tool that I designed from scratch. Through problem framing, three distinct needs were discovered: trend discovery, idea-to-script conversion, and pre-publish video analysis.",
+    challenge: "Users were overwhelmed with complex data tables and slow performance. The goal was to simplify without losing depth.",
+    solution: "We built a modular dashboard with predictive widgets, dark/light mode, and intelligent defaults. Reduced load times by 40%.",
+    results: ["40% faster data retrieval", "85% user satisfaction increase", "Adopted by 3 major fintech partners"],
+    caseStudy: [
       {
-        "type": "section",
+        type: "section",
         "title": "Product Statement",
         "description": "Trendy Bee is an intelligent content creation tool that I designed from scratch. Through problem framing, three distinct needs were discovered: trend discovery, idea-to-script conversion, and pre-publish video analysis. 4 Job Stories were defined, pain points were prioritized, and 4 key trade-offs were made. User flows include both the full path (trend → brainstorm) and quick path. The product is currently under development."
       },
@@ -22,7 +24,7 @@
       },
       {
         "type": "image",
-        "src": "/assets/images/TrendyBee/1.png",
+        "src": "/assets/images/Cover/trendybee.png",
         "caption": "Early product exploration"
       },
       {
@@ -46,6 +48,7 @@
     "title": "AI Productivity App",
     "category": "UX Strategy • Mobile",
     "coverImage": "/assets/images/Cover/medicine.png",
+    images: ["/assets/images/Cover/medicine.png"],
     "fullDescription": "An AI-powered to-do and focus assistant that learns user habits and suggests optimal workflows. Seamless cross-platform experience.",
     "challenge": "Users felt overwhelmed by traditional task managers. The app needed to feel proactive, not reactive.",
     "solution": "Designed an adaptive interface with contextual AI prompts, gamified focus sessions, and natural language input.",
@@ -87,6 +90,7 @@
     "title": "Analytics Platform",
     "category": "Dashboard UX • Web App",
     "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+    images: [],
     "fullDescription": "Enterprise-grade analytics platform with customizable reports, real-time collaboration, and interactive data visualizations.",
     "challenge": "Complex datasets required an intuitive filtering system. Existing tools were too rigid.",
     "solution": "Created a flexible drag-and-drop report builder, real-time sync, and role-based views.",
@@ -123,6 +127,7 @@
     "title": "Design System",
     "category": "UI Infrastructure",
     "coverImage": "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?q=80&w=1200&auto=format&fit=crop",
+    images: [],
     "fullDescription": "A comprehensive design system with components, tokens, and documentation used across 8 product teams to ensure consistency.",
     "challenge": "Inconsistent UI across teams led to poor user experience and wasted development time.",
     "solution": "Built a modular system with Figma library and Storybook, including dark mode and accessibility-first components.",

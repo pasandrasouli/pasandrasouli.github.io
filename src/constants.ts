@@ -1,5 +1,6 @@
-export const LINKEDIN_URL = 'https://linkedin.com/in/pasand-rasouli'
-export const BEHANCE_URL = 'https://behance.net/pasandrasouli'
-export const SITE_TITLE = 'Pasand Rasouli — Product Designer'
-export const SITE_DESCRIPTION =
-  'Product designer focused on crafting modern digital experiences, intuitive interfaces, and scalable design systems.'
+import { site } from './data/site'
+
+export const SITE_TITLE = site.title
+export const SITE_DESCRIPTION = site.description
+export const LINKEDIN_URL = site.contact.links.find((link) => link.label === 'LinkedIn')?.href ?? ''
+export const BEHANCE_URL = site.contact.links.find((link) => link.label === 'Behance')?.href ?? ''

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Page } from '../types'
+import { site } from '../data/site'
 
 const props = defineProps<{
   currentPage: Page
@@ -11,14 +12,6 @@ const emit = defineEmits<{
 }>()
 
 const mobileMenuOpen = ref(false)
-
-const navItems: { page: Page; label: string; hash: string }[] = [
-  { page: 'home', label: 'Home', hash: '' },
-  { page: 'work', label: 'Work', hash: 'work' },
-  { page: 'about', label: 'About', hash: 'about' },
-  { page: 'process', label: 'Process', hash: 'process' },
-  { page: 'contact', label: 'Contact', hash: 'contact' },
-]
 
 function isActive(page: Page) {
   if (page === 'work') {
@@ -41,11 +34,11 @@ function hashFor(page: Page) {
 <template>
   <header class="fixed top-0 left-0 w-full z-50 border-b border-white/5 backdrop-blur-xl bg-black/30">
     <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-      <a href="#" @click.prevent="nav('home')" class="text-xl font-semibold tracking-tight">Pasand Rasouli</a>
+      <a href="#" @click.prevent="nav('home')" class="text-xl font-semibold tracking-tight">{{ site.name }}</a>
 
       <nav class="hidden md:flex items-center gap-8 text-sm text-white/60">
         <a
-          v-for="item in navItems"
+          v-for="item in site.navigation"
           :key="item.page"
           :href="hashFor(item.page)"
           @click.prevent="nav(item.page)"
@@ -59,7 +52,7 @@ function hashFor(page: Page) {
           href="#contact"
           @click.prevent="nav('contact')"
           class="hidden sm:inline-flex border border-white/10 hover:border-white/30 transition px-5 py-2 rounded-full text-sm"
-        >Let's Talk</a>
+        >{{ site.ctaLabel }}</a>
 
         <button
           type="button"
@@ -80,7 +73,7 @@ function hashFor(page: Page) {
     >
       <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-3 text-sm text-white/60">
         <a
-          v-for="item in navItems"
+          v-for="item in site.navigation"
           :key="`mobile-${item.page}`"
           :href="hashFor(item.page)"
           @click.prevent="nav(item.page)"
@@ -91,7 +84,7 @@ function hashFor(page: Page) {
           href="#contact"
           @click.prevent="nav('contact')"
           class="mt-2 border border-white/10 hover:border-white/30 transition px-5 py-2 rounded-full text-sm text-center"
-        >Let's Talk</a>
+        >{{ site.ctaLabel }}</a>
       </div>
     </nav>
   </header>

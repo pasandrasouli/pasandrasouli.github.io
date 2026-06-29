@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { Project } from '../types'
+import type { Page, Project } from '../types'
+import { site } from '../data/site'
 
 defineProps<{
   projects: Project[]
@@ -8,6 +9,8 @@ defineProps<{
 const emit = defineEmits<{
   'open-project': [id: number]
 }>()
+
+const content = site.work
 
 function openProject(id: number) {
   emit('open-project', id)
@@ -19,11 +22,9 @@ function openProject(id: number) {
     <div class="max-w-7xl mx-auto px-6 py-8">
       <div class="flex items-end justify-between mb-14 flex-wrap gap-6">
         <div>
-          <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-4">Selected Work</p>
-          <h2 class="text-4xl md:text-6xl font-semibold tracking-tight mb-4">Featured Projects</h2>
-          <p class="text-white/40 max-w-sm text-base mb-4">
-            A curated selection of product design work across SaaS, fintech, AI, and mobile experiences.
-          </p>
+          <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-4">{{ content.eyebrow }}</p>
+          <h2 class="text-4xl md:text-6xl font-semibold tracking-tight mb-4">{{ content.title }}</h2>
+          <p class="text-white/40 max-w-sm text-base mb-4">{{ content.description }}</p>
         </div>
       </div>
 

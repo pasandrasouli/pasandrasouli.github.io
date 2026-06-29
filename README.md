@@ -24,6 +24,8 @@ The repo includes a GitHub Actions workflow that typechecks, builds, and deploys
 
 ## Project data
 
-Edit project content in [`src/data/projects.json`](src/data/projects.json).
+Edit site content in [`src/data/site.ts`](src/data/site.ts).
+
+Edit project content in [`src/data/projects.ts`](src/data/projects.ts).
 
 Static assets go in [`public/assets/`](public/assets/).

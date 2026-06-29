@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
-import projectsData from './data/projects.json'
+import {projects} from './data/projects'
 import { useGlassCursor } from './composables/useGlassCursor'
 import { SITE_TITLE } from './constants'
-import type { Page, Project } from './types'
+import type { Page } from './types'
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
 import HomePage from './components/HomePage.vue'
@@ -13,7 +13,6 @@ import AboutPage from './components/AboutPage.vue'
 import ProcessPage from './components/ProcessPage.vue'
 import ContactPage from './components/ContactPage.vue'
 
-const projects: Project[] = projectsData as Project[]
 const currentPage = ref<Page>('home')
 const selectedProjectId = ref<number | null>(null)
 const glassCursor = ref<HTMLElement | null>(null)

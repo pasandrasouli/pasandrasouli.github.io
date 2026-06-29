@@ -38,11 +38,7 @@ function back() {
           <p class="text-white/70 text-lg leading-relaxed mb-10">{{ project.fullDescription }}</p>
 
           <div v-if="project.caseStudy?.length" class="prose prose-invert max-w-none">
-            <CaseStudyBlock
-              v-for="(block, index) in project.caseStudy"
-              :key="index"
-              :block="block"
-            />
+            <CaseStudyBlock v-for="(block, index) in project.caseStudy" :key="index" :block="block" />
           </div>
 
           <div v-else>

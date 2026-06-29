@@ -10,9 +10,12 @@ defineProps<{
   <div v-if="block.type === 'section'" class="mt-10 first:mt-0">
     <h2 class="text-2xl md:text-3xl font-bold mb-4">{{ block.title }}</h2>
     <p v-if="block.description" class="text-white/70 text-lg leading-relaxed">{{ block.description }}</p>
+    <figure v-if="block.imageSrc" class="mt-6">
+      <img :src="block.imageSrc" :alt="block.title" class="rounded-2xl w-full" />
+    </figure>
   </div>
 
-  <figure v-else-if="block.type === 'image' && block.src" class="my-8">
+  <figure v-else-if="block.type === 'image'" class="my-8">
     <img :src="block.src" :alt="block.caption || ''" class="rounded-2xl w-full" />
     <figcaption v-if="block.caption" class="text-white/40 text-sm text-center mt-3">{{ block.caption }}</figcaption>
   </figure>
@@ -26,7 +29,10 @@ defineProps<{
     </div>
   </div>
 
-  <blockquote v-else-if="block.type === 'quote'" class="border-l-4 border-white/30 pl-6 my-8 italic text-white/60 text-xl">
+  <blockquote
+    v-else-if="block.type === 'quote'"
+    class="border-l-4 border-white/30 pl-6 my-8 italic text-white/60 text-xl"
+  >
     <p>{{ block.content }}</p>
     <footer class="text-sm text-white/40 mt-2 not-italic">— {{ block.author }}</footer>
   </blockquote>
@@ -39,11 +45,13 @@ defineProps<{
   </div>
 
   <div v-else-if="block.type === 'video'" class="aspect-video my-8">
-    <iframe
-      :src="block.embedUrl"
-      class="w-full h-full rounded-2xl"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
+    <iframe :src="block.embedUrl" class="w-full h-full rounded-2xl" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <div
+    v-else
+    class="my-8 rounded-2xl border border-dashed border-amber-400/40 bg-amber-400/5 p-4 text-amber-200/70 text-sm"
+  >
+    Unsupported case study block type.
   </div>
 </template>
