@@ -2,10 +2,10 @@ import { Project } from '../../types'
 
 export const omsXanis: Project = {
   id: 5,
-  title: 'OMS Xanis',
-  category: '',
-  coverImage: '',
-  fullDescription: '',
+  title: "OMS Xanis",
+  category: "",
+  coverImage: "./public/assets/images/Cover/transaction.png",
+  fullDescription: "",
   results: [],
   caseStudy: [
     {

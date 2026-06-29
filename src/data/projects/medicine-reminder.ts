@@ -1,11 +1,11 @@
 import { Project } from '../../types'
 
 export const medicineReminder: Project = {
-  id: 3,
-  title: 'Medicine Reminder',
-  category: '',
-  coverImage: 'https://placehold.co/600x400/EEE/31343C',
-  fullDescription: '',
+  id: 3, 
+  title: "Medicine Reminder",
+  category: "",
+  coverImage: "./public/assets/images/Cover/Medicine.png",
+  fullDescription: "",
   results: [],
   caseStudy: [
     {
