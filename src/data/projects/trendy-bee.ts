@@ -4,7 +4,7 @@ export const trendyBee: Project = {
   id: 1,
   title: "TrendyBee",
   category: "Product Design Process Case Study • AI",
-  coverImage: "./public/assets/images/Cover/Trendybee.png",
+  coverImage: "./assets/images/Cover/Trendybee.png",
   fullDescription: "",
   results: ["40% faster data retrieval", "85% user satisfaction increase", "Adopted by 3 major fintech partners"],
   caseStudy: [

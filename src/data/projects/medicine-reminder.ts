@@ -4,7 +4,7 @@ export const medicineReminder: Project = {
   id: 3, 
   title: "Medicine Reminder",
   category: "",
-  coverImage: "./public/assets/images/Cover/Medicine.png",
+  coverImage: "./assets/images/Cover/Medicine.png",
   fullDescription: "",
   results: [],
   caseStudy: [

@@ -4,7 +4,7 @@ export const grandBazar: Project = {
   id: 2,
   title: "Grand Bazar",
   category: "Product Design Process",
-  coverImage: "./public/assets/images/Cover/Grandbazar.png",
+  coverImage: "./assets/images/Cover/Grandbazar.png",
   fullDescription: "",
   results: [],
   caseStudy: [
@@ -56,7 +56,7 @@ export const grandBazar: Project = {
       ],
     },
     
-    { type: "image", caption: "My Role", src: "./public/assets/images/Grandbazar/MyRole.png" },
+    { type: "image", caption: "My Role", src: "./assets/images/Grandbazar/MyRole.png" },
 
     { type: "image", caption: "Design Thinking Process", src: "./public/assets/images/Grandbazar/DesignThinkingProcess.png" },
     { type: "image", caption: "Project Timeline", src: "./public/assets/images/Grandbazar/ProjectTimeline.png" },
