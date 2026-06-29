@@ -14,9 +14,9 @@ export const trendyBee: Project = {
       description: "Trendy Bee is an intelligent content creation tool that I designed from scratch. Through problem framing, three distinct needs were discovered: trend discovery, idea-to-script conversion, and pre-publish video analysis. 4 Job Stories were defined, pain points were prioritized, and 4 key trade-offs were made. User flows include both the full path (trend → brainstorm) and quick path. The product is currently under development."
     },
     
-    { type: "image", caption: "Design Thinking Process", src: "" },
+    { type: "image", caption: "Design Thinking Process", src: "https://placehold.co/600x400/EEE/31343C" },
 
-    { type: "image", caption: "My Role", src: "" },
+    { type: "image", caption: "My Role", src: "https://placehold.co/600x400/EEE/31343C" },
 
     {
       type: "withBullet",
