@@ -71,6 +71,11 @@ export interface WorkContent {
   description: string
 }
 
+export interface ProjectDetailContent {
+  moreProjectsEyebrow: string
+  moreProjectsTitle: string
+}
+
 export interface SiteContent {
   name: string
   title: string
@@ -82,6 +87,7 @@ export interface SiteContent {
   process: ProcessContent
   contact: ContactContent
   work: WorkContent
+  projectDetail: ProjectDetailContent
 }
 
 export type CaseStudyBlock =

@@ -127,4 +127,8 @@ export const site: SiteContent = {
     description:
       'A curated selection of product design work across SaaS, fintech, AI, and mobile experiences.',
   },
+  projectDetail: {
+    moreProjectsEyebrow: 'Explore more',
+    moreProjectsTitle: 'Other projects',
+  },
 }

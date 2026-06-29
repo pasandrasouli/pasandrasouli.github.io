@@ -1,17 +1,24 @@
 <script setup lang="ts">
 import CaseStudyBlock from './CaseStudyBlock.vue'
+import OtherProjectsSlider from './OtherProjectsSlider.vue'
 import type { Page, Project } from '../types'
 
 defineProps<{
   project: Project | null
+  projects: Project[]
 }>()
 
 const emit = defineEmits<{
   navigate: [page: Page]
+  'open-project': [id: number]
 }>()
 
 function back() {
   emit('navigate', 'work')
+}
+
+function openProject(id: number) {
+  emit('open-project', id)
 }
 </script>
 
@@ -61,6 +68,12 @@ function back() {
           </div>
         </div>
       </div>
+
+      <OtherProjectsSlider
+        :projects="projects"
+        :current-project-id="project.id"
+        @open-project="openProject"
+      />
     </div>
   </div>
 </template>

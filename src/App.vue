@@ -134,7 +134,9 @@ onBeforeUnmount(() => {
           v-else-if="currentPage === 'project-detail'"
           key="project-detail"
           :project="selectedProject"
+          :projects="projects"
           @navigate="navigate"
+          @open-project="openProjectDetail"
         />
         <AboutPage v-else-if="currentPage === 'about'" key="about" />
         <ProcessPage v-else-if="currentPage === 'process'" key="process" />
