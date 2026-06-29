@@ -206,18 +206,21 @@
 
 .glass-cursor {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.01);
-  backdrop-filter: blur(2px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.15);
   pointer-events: none;
   z-index: 9999;
-  transform: translate(-50%, -50%);
   opacity: 0;
-  transition: width 0.2s, height 0.2s, backdrop-filter 0.2s, border-color 0.2s;
+  transform: translate(-50%, -50%) scale(1);
+  transition: width 0.25s ease, height 0.25s ease, opacity 0.2s ease, border-color 0.25s ease, transform 0.12s ease;
   will-change: left, top;
 }
 
@@ -225,32 +228,20 @@
   opacity: 1;
 }
 
-/* حالت مگنیفای (هاور روی اهداف) */
-.glass-cursor.magnify {
-  width: 120px;
-  height: 120px;
-  background: rgba(0,0,0,0.2);
-  backdrop-filter: 2px;
-  border: 2px solid rgba(255,255,255,0.9);
-  box-shadow: 0 0 30px rgba(0,0,0,0.5);
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-/* تصویر بزرگ‌شده داخل canvas */
-.glass-cursor canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  pointer-events: none;
+.glass-cursor.hover {
+  width: 64px;
+  height: 64px;
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .glass-cursor.click {
   transform: translate(-50%, -50%) scale(0.85);
-  transition: transform 0.1s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+}
+
+header,
+header * {
+  cursor: auto !important;
 }
 .work-thumbnail {
   filter: grayscale(100%);
@@ -285,7 +276,7 @@
 
 <!-- MAIN DYNAMIC CONTENT (Alpine.js SPA) -->
 <main class="pt-28 relative min-h-[calc(100vh-120px)]">
-<div x-show="currentPage === 'home'" x-transition.opacity.duration.300ms class="w-full relative overflow-hidden min-h-[85vh] flex items-center">
+<div id="home-hero" x-show="currentPage === 'home'" x-transition.opacity.duration.300ms class="w-full relative overflow-hidden min-h-[85vh] flex items-center">
   <!-- بکگراند ثابت تیره با شیب به سمت سرمه ای (بدون انیمیشن) -->
   <!-- <div class="absolute inset-0 bg-gradient-to-br from-[#05050A] via-[#0A0A18] to-[#0F0F20]"></div> -->
   
@@ -417,63 +408,60 @@
           </div>
         </div>
 
-        <!-- بخش کیس استادی داینامیک -->
+        <p class="text-white/70 text-lg leading-relaxed mb-10" x-text="selectedProject?.fullDescription"></p>
+
+        <!-- Dynamic case study blocks -->
         <div class="prose prose-invert max-w-none">
-          <<template x-for="(block, index) in selectedProject?.caseStudy" :key="index">
-            <div>
-              <!-- بلاک heading -->
-              <div x-if="block.type === 'heading'">
-                <h2 class="text-2xl md:text-3xl font-bold mt-10 mb-4" x-text="block.content"></h2>
+          <template x-for="(block, index) in selectedProject?.caseStudy" :key="index">
+            <!-- Section: title + description -->
+            <template x-if="block.type === 'section'">
+              <div class="mt-10 first:mt-0">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4" x-text="block.title"></h2>
+                <p class="text-white/70 text-lg leading-relaxed" x-text="block.description"></p>
               </div>
+            </template>
 
-              <!-- بلاک متن ساده -->
-              <div x-if="block.type === 'text'">
-                <p class="text-white/70 text-lg leading-relaxed my-6" x-text="block.content"></p>
-              </div>
+            <template x-if="block.type === 'image'">
+              <figure class="my-8">
+                <img :src="block.src" :alt="block.caption || ''" class="rounded-2xl w-full">
+                <figcaption class="text-white/40 text-sm text-center mt-3" x-text="block.caption"></figcaption>
+              </figure>
+            </template>
 
-              <!-- بلاک عکس -->
-              <div x-if="block.type === 'image'">
-                <img :src="block.src" :alt="block.caption" class="rounded-2xl w-full my-8">
-                <p class="text-white/40 text-sm text-center" x-text="block.caption"></p>
-              </div>
-
-              <!-- بلاک دوستونی -->
-              <div x-if="block.type === 'twoColumn'" class="grid md:grid-cols-2 gap-8 my-10">
+            <template x-if="block.type === 'twoColumn'">
+              <div class="grid md:grid-cols-2 gap-8 my-10">
                 <div class="glass rounded-2xl p-6">
-                  <p x-text="block.left"></p>
+                  <p class="text-white/70" x-text="block.left"></p>
                 </div>
                 <div class="glass rounded-2xl p-6">
-                  <p x-text="block.right"></p>
+                  <p class="text-white/70" x-text="block.right"></p>
                 </div>
               </div>
+            </template>
 
-              <!-- بلاک نقل قول -->
-              <div x-if="block.type === 'quote'">
-                <div class="border-l-4 border-white/30 pl-6 my-8 italic text-white/60 text-xl">
-                  <p x-text="block.content"></p>
-                  <p class="text-sm text-white/40 mt-2" x-text="'— ' + block.author"></p>
-                </div>
-              </div>
+            <template x-if="block.type === 'quote'">
+              <blockquote class="border-l-4 border-white/30 pl-6 my-8 italic text-white/60 text-xl">
+                <p x-text="block.content"></p>
+                <footer class="text-sm text-white/40 mt-2 not-italic" x-text="'— ' + block.author"></footer>
+              </blockquote>
+            </template>
 
-              <!-- بلاک جدول نتایج -->
-              <div x-if="block.type === 'resultsTable'">
-                <div class="bg-white/5 rounded-2xl p-6 my-8">
-                  <h3 class="text-xl font-semibold mb-4">Key Results</h3>
-                  <ul class="list-disc list-inside space-y-2 text-white/70">
-                    <template x-for="item in block.items">
-                      <li x-text="item"></li>
-                    </template>
-                  </ul>
-                </div>
+            <template x-if="block.type === 'resultsTable'">
+              <div class="bg-white/5 rounded-2xl p-6 my-8">
+                <h3 class="text-xl font-semibold mb-4">Key Results</h3>
+                <ul class="list-disc list-inside space-y-2 text-white/70">
+                  <template x-for="item in block.items" :key="item">
+                    <li x-text="item"></li>
+                  </template>
+                </ul>
               </div>
+            </template>
 
-              <!-- بلاک ویدئو (YouTube/Vimeo) -->
-              <div x-if="block.type === 'video'">
-                <div class="aspect-video my-8">
-                  <iframe :src="block.embedUrl" class="w-full h-full rounded-2xl" frameborder="0" allowfullscreen></iframe>
-                </div>
+            <template x-if="block.type === 'video'">
+              <div class="aspect-video my-8">
+                <iframe :src="block.embedUrl" class="w-full h-full rounded-2xl" frameborder="0" allowfullscreen></iframe>
               </div>
-            </div>
+            </template>
           </template>
         </div>
 
@@ -631,7 +619,7 @@
     </div>
   </div>
 </footer>
-<div id="glassCursor" class="glass-cursor"></div>
+<div id="glassCursor" class="glass-cursor" aria-hidden="true"></div>
 <script>
   function app() {
     return {
@@ -678,164 +666,87 @@
         this.navigate('project-detail', id);
       },
       
-     initCustomCursor() {
-  const cursor = document.getElementById('glassCursor');
-  if (!cursor) return;
-  
-  // ایجاد canvas برای مگنیفای
-  let magnifyCanvas = document.createElement('canvas');
-  magnifyCanvas.width = 120;
-  magnifyCanvas.height = 120;
-  magnifyCanvas.style.width = '120px';
-  magnifyCanvas.style.height = '120px';
-  magnifyCanvas.style.borderRadius = '50%';
-  magnifyCanvas.style.position = 'absolute';
-  magnifyCanvas.style.top = '0';
-  magnifyCanvas.style.left = '0';
-  magnifyCanvas.style.pointerEvents = 'none';
-  cursor.appendChild(magnifyCanvas);
-  let ctx = magnifyCanvas.getContext('2d');
-  
-  let mouseX = 0, mouseY = 0;
-  let cursorX = 0, cursorY = 0;
-  let isInHero = false;
-  let magnifyActive = false;
-  let heroSection = null;
-  let animationId = null;
-  
-  // حرکت نرم
-  const updatePosition = () => {
-    const dx = mouseX - cursorX;
-    const dy = mouseY - cursorY;
-    cursorX += dx * 0.12;
-    cursorY += dy * 0.12;
-    cursor.style.left = cursorX + 'px';
-    cursor.style.top = cursorY + 'px';
-    
-    // اگر حالت مگنیفای فعال است، canvas را آپدیت کن
-    if (magnifyActive && heroSection && ctx) {
-      try {
-        // گرفتن ناحیه اطراف موس از صفحه
-        const zoomFactor = 2;
-        const size = 120;
-        const half = size / 2;
-        const sx = mouseX - half / zoomFactor;
-        const sy = mouseY - half / zoomFactor;
-        // رسم تصویر بزرگ‌شده
-        ctx.clearRect(0, 0, size, size);
-        ctx.drawImage(
-          heroSection,
-          sx, sy, size / zoomFactor, size / zoomFactor,
-          0, 0, size, size
-        );
-        // اضافه کردن خطوط ضربدری
-        ctx.beginPath();
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = 1;
-        ctx.moveTo(size/2, 0);
-        ctx.lineTo(size/2, size);
-        ctx.moveTo(0, size/2);
-        ctx.lineTo(size, size/2);
-        ctx.stroke();
-      } catch(e) { /* نادیده گرفته شود */ }
-    }
-    
-    requestAnimationFrame(updatePosition);
-  };
-  updatePosition();
-  
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-  
-  const enableMagnify = (target) => {
-    if (!target) return;
-    magnifyActive = true;
-    cursor.classList.add('magnify');
-    cursor.classList.remove('hover'); // استایل معمولی هاور حذف شود
-    magnifyCanvas.style.display = 'block';
-    // اطمینان از وجود heroSection
-    if (!heroSection) heroSection = document.querySelector('[x-show="currentPage === \'home\'"]');
-  };
-  
-  const disableMagnify = () => {
-    magnifyActive = false;
-    cursor.classList.remove('magnify');
-    magnifyCanvas.style.display = 'none';
-    ctx.clearRect(0, 0, 120, 120);
-  };
-  
-  const enableCursor = () => {
-    isInHero = true;
-    cursor.classList.add('active');
-    document.body.style.cursor = 'none';
-    heroSection = document.querySelector('[x-show="currentPage === \'home\'"]');
-    if (heroSection) heroSection.style.cursor = 'none';
-  };
-  
-  const disableCursor = () => {
-    isInHero = false;
-    cursor.classList.remove('active');
-    document.body.style.cursor = '';
-    if (heroSection) heroSection.style.cursor = '';
-    cursor.classList.remove('hover', 'magnify', 'click');
-    disableMagnify();
-  };
-  
-  const attachHeroEvents = (hero) => {
-    // اهداف مگنیفای: نوشته بزرگ h1 و دکمه‌ها
-    const magnifyTargets = hero.querySelectorAll('h1, .gradient-text, .bg-white, .glass');
-    magnifyTargets.forEach(el => {
-      el.addEventListener('mouseenter', () => enableMagnify(el));
-      el.addEventListener('mouseleave', () => disableMagnify());
-      el.addEventListener('mousedown', () => {
-        cursor.classList.add('click');
-        el.addEventListener('mouseup', () => cursor.classList.remove('click'), { once: true });
-      });
-    });
-    // سایر المان‌های تعاملی فقط هاور معمولی (بزرگ شدن حباب)
-    const normalTargets = hero.querySelectorAll('a, button, [role="button"]');
-    normalTargets.forEach(el => {
-      if (!el.closest('h1')) { // جلوگیری از تداخل
-        el.addEventListener('mouseenter', () => {
-          if (!magnifyActive) cursor.classList.add('hover');
+      initCustomCursor() {
+        const cursor = document.getElementById('glassCursor');
+        const header = document.querySelector('header');
+        if (!cursor) return;
+
+        const app = this;
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let cursorX = mouseX;
+        let cursorY = mouseY;
+        let visible = false;
+
+        const getHero = () => document.getElementById('home-hero');
+
+        const isOverHero = (x, y) => {
+          if (app.currentPage !== 'home') return false;
+          const hero = getHero();
+          if (!hero) return false;
+          const rect = hero.getBoundingClientRect();
+          if (rect.height === 0 || rect.width === 0) return false;
+          if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) return false;
+          if (header) {
+            const headerRect = header.getBoundingClientRect();
+            if (y >= headerRect.top && y <= headerRect.bottom) return false;
+          }
+          return true;
+        };
+
+        const setVisible = (show) => {
+          if (show === visible) return;
+          visible = show;
+          if (show) {
+            cursorX = mouseX;
+            cursorY = mouseY;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+          }
+          cursor.classList.toggle('active', show);
+          const hero = getHero();
+          if (hero) hero.style.cursor = show ? 'none' : '';
+          if (!show) {
+            cursor.classList.remove('hover', 'click');
+            document.body.style.cursor = '';
+          }
+        };
+
+        document.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          const overHero = isOverHero(e.clientX, e.clientY);
+          setVisible(overHero);
+          document.body.style.cursor = overHero ? 'none' : '';
+
+          if (visible) {
+            const interactive = e.target.closest('#home-hero a, #home-hero button');
+            cursor.classList.toggle('hover', !!interactive);
+          }
         });
-        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        el.addEventListener('mousedown', () => {
-          cursor.classList.add('click');
-          el.addEventListener('mouseup', () => cursor.classList.remove('click'), { once: true });
+
+        document.addEventListener('mousedown', () => {
+          if (visible) cursor.classList.add('click');
         });
-      }
-    });
-  };
-  
-  const observer = new MutationObserver(() => {
-    if (this.currentPage === 'home') {
-      setTimeout(() => {
-        const newHero = document.querySelector('[x-show="currentPage === \'home\'"]');
-        if (newHero && !isInHero) {
-          enableCursor();
-          attachHeroEvents(newHero);
-        }
-      }, 50);
-    } else {
-      if (isInHero) disableCursor();
-    }
-  });
-  
-  observer.observe(document.querySelector('main'), { attributes: true, childList: true, subtree: false });
-  
-  if (this.currentPage === 'home') {
-    setTimeout(() => {
-      const hero = document.querySelector('[x-show="currentPage === \'home\'"]');
-      if (hero) {
-        enableCursor();
-        attachHeroEvents(hero);
-      }
-    }, 100);
-  }
-},
+
+        document.addEventListener('mouseup', () => {
+          cursor.classList.remove('click');
+        });
+
+        document.addEventListener('mouseleave', () => {
+          setVisible(false);
+          document.body.style.cursor = '';
+        });
+
+        const animate = () => {
+          cursorX += (mouseX - cursorX) * 0.12;
+          cursorY += (mouseY - cursorY) * 0.12;
+          cursor.style.left = cursorX + 'px';
+          cursor.style.top = cursorY + 'px';
+          requestAnimationFrame(animate);
+        };
+        animate();
+      },
       
       initRouter() {
         this.initCustomCursor();
