@@ -8,7 +8,7 @@ export const grandBazar: Project = {
   fullDescription: "",
   results: [],
   caseStudy: [
-      {
+    {
       type: "section",
       title: "Product Statement",
       description: " Most users receive credit from multiple service providers — banks, telecom companies, or financial platforms. However, each of these credits is isolated and can only be used separately.There was no existing solution that allowed users to combine all their available credit into one platform. This led to confusion, missed opportunities, and poor visibility into their total credit and spending power."
@@ -16,9 +16,9 @@ export const grandBazar: Project = {
     {
       type: "section",
       title: "Possible Solution",
-      description: "Build a unified financial platform that aggregates all user credit from various providers into one digital wallet."  
+      description: "Build a unified financial platform that aggregates all user credit from various providers into one digital wallet."
     },
-      {
+    {
       type: "withBullet",
       title: "",
       titleGroups: [{ subTitle: "This platform should allow users to: ", description: "" }],
@@ -29,7 +29,7 @@ export const grandBazar: Project = {
         "Easily track where their credit comes from and how it’s being used"
       ],
     },
-          {
+    {
       type: "withBullet",
       title: "Target Audience",
       titleGroups: [{ subTitle: " ", description: "" }],
@@ -41,7 +41,7 @@ export const grandBazar: Project = {
         "Tech-savvy mobile users"
       ],
     },
-          {
+    {
       type: "withBullet",
       title: "The Approach",
       titleGroups: [{ subTitle: " ", description: "" }],
@@ -55,7 +55,7 @@ export const grandBazar: Project = {
         "Iterative Improvements – Applied feedback loops to polish UX and add new features"
       ],
     },
-    
+
     { type: "image", caption: "My Role", src: "./assets/images/Grandbazar/MyRole.png" },
 
     { type: "image", caption: "Design Thinking Process", src: "./public/assets/images/Grandbazar/DesignThinkingProcess.png" },
@@ -89,16 +89,16 @@ export const grandBazar: Project = {
 
       ],
     },
-          {
+    {
       type: "section",
       title: "Quantitative Research",
       description: " To validate the patterns observed in user interviews, we conducted a survey with 150+ participants who were active credit users. The goal was to gather measurable data on user behavior, pain points, and expectations."
     },
     { type: "image", caption: "Quantitative Research", src: "./public/assets/images/Grandbazar/QuantitativeResearch.png" },
-     
+
     { type: "image", caption: "Information Architecture", src: "./public/assets/images/Grandbazar/UserPersona.png" },
     { type: "image", caption: "Typography & Colors", src: "./public/assets/images/Grandbazar/Typography&Colors.png" },
     { type: "image", caption: "High-Fidelity Wireframes", src: "./public/assets/images/Grandbazar/HighFidelityWireframes.png" },
-   
+
   ]
 }
