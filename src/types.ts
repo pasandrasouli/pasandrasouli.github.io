@@ -120,16 +120,22 @@ export type CaseStudyBlock =
       type: 'video'
       embedUrl: string
     }
+  | {
+      type: 'withBullet',
+      title: string,
+      titleGroups: {
+        subTitle: string,
+        description: string,
+      }[],
+      items: string[]
+    }
 
 export interface Project {
   id: number
   title: string
   category: string
   coverImage: string
-  images: string[]
   fullDescription: string
-  challenge: string
-  solution: string
   results: string[]
   caseStudy?: CaseStudyBlock[]
 }
