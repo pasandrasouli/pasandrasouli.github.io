@@ -1,5 +1,10 @@
-<script setup>
-const emit = defineEmits(['navigate'])
+<script setup lang="ts">
+import type { Page } from '../types'
+
+const emit = defineEmits<{
+  navigate: [page: Page]
+}>()
+
 
 const skills = [
   'Figma Mastery',
@@ -25,9 +30,35 @@ const skills = [
   'Design Thinking',
   'Wireframing',
   'UX Research',
+] as const
+
+type Particle = {
+  id: string
+  className: string
+  style: string
+}
+
+const particles: Particle[] = [
+  { id: 'p1', className: 'particle w-1 h-1 bg-white-400/40 rounded-full top-[10%] left-[5%] blur-none', style: 'animation: floatParticle 8s infinite alternate;' },
+  { id: 'p2', className: 'particle w-1.5 h-1.5 bg-white-500/30 rounded-full top-[20%] left-[15%] blur-[0.5px]', style: 'animation: floatParticle 12s infinite alternate-reverse;' },
+  { id: 'p3', className: 'particle w-1 h-1 bg-white-400/40 rounded-full top-[30%] left-[25%] blur-none', style: 'animation: floatParticle 10s infinite alternate;' },
+  { id: 'p4', className: 'particle w-2 h-2 bg-white-400/30 rounded-full top-[15%] left-[40%] blur-[0.5px]', style: 'animation: floatParticle 14s infinite alternate-reverse;' },
+  { id: 'p5', className: 'particle w-1 h-1 bg-white-400/40 rounded-full top-[45%] left-[10%] blur-none', style: 'animation: floatParticle 9s infinite alternate;' },
+  { id: 'p6', className: 'particle w-1.5 h-1.5 bg-white-500/35 rounded-full top-[60%] left-[20%] blur-[0.5px]', style: 'animation: floatParticle 11s infinite alternate-reverse;' },
+  { id: 'p7', className: 'particle w-1 h-1 bg-white-400/40 rounded-full top-[75%] left-[35%] blur-none', style: 'animation: floatParticle 13s infinite alternate;' },
+  { id: 'p8', className: 'particle w-2 h-2 bg-white-400/30 rounded-full top-[85%] left-[50%] blur-[0.5px]', style: 'animation: floatParticle 15s infinite alternate-reverse;' },
+  { id: 'p9', className: 'particle w-1 h-1 bg-white-500/40 rounded-full top-[5%] left-[70%] blur-none', style: 'animation: floatParticle 7s infinite alternate;' },
+  { id: 'p10', className: 'particle w-1.5 h-1.5 bg-white-400/35 rounded-full top-[25%] left-[80%] blur-[0.5px]', style: 'animation: floatParticle 16s infinite alternate-reverse;' },
+  { id: 'p11', className: 'particle w-1 h-1 bg-white-500/40 rounded-full top-[50%] left-[90%] blur-none', style: 'animation: floatParticle 12s infinite alternate;' },
+  { id: 'p12', className: 'particle w-2 h-2 bg-white-500/30 rounded-full top-[70%] left-[75%] blur-[0.5px]', style: 'animation: floatParticle 10s infinite alternate-reverse;' },
+  { id: 'p13', className: 'particle w-1 h-1 bg-white-500/40 rounded-full top-[40%] left-[60%] blur-none', style: 'animation: floatParticle 14s infinite alternate;' },
+  { id: 'p14', className: 'particle w-1.5 h-1.5 bg-white-400/35 rounded-full top-[80%] left-[85%] blur-[0.5px]', style: 'animation: floatParticle 9s infinite alternate-reverse;' },
+  { id: 'p15', className: 'particle w-1 h-1 bg-white-400/40 rounded-full top-[10%] left-[95%] blur-none', style: 'animation: floatParticle 11s infinite alternate;' },
 ]
 
-const nav = (page) => emit('navigate', page)
+function nav(page: Page) {
+  emit('navigate', page)
+}
 </script>
 
 <template>
@@ -37,21 +68,12 @@ const nav = (page) => emit('navigate', page)
   >
     <div class="soft-glow"></div>
 
-    <div class="particle w-1 h-1 bg-white-400/40 rounded-full top-[10%] left-[5%] blur-none" style="animation: floatParticle 8s infinite alternate;"></div>
-    <div class="particle w-1.5 h-1.5 bg-white-500/30 rounded-full top-[20%] left-[15%] blur-[0.5px]" style="animation: floatParticle 12s infinite alternate-reverse;"></div>
-    <div class="particle w-1 h-1 bg-white-400/40 rounded-full top-[30%] left-[25%] blur-none" style="animation: floatParticle 10s infinite alternate;"></div>
-    <div class="particle w-2 h-2 bg-white-400/30 rounded-full top-[15%] left-[40%] blur-[0.5px]" style="animation: floatParticle 14s infinite alternate-reverse;"></div>
-    <div class="particle w-1 h-1 bg-white-400/40 rounded-full top-[45%] left-[10%] blur-none" style="animation: floatParticle 9s infinite alternate;"></div>
-    <div class="particle w-1.5 h-1.5 bg-white-500/35 rounded-full top-[60%] left-[20%] blur-[0.5px]" style="animation: floatParticle 11s infinite alternate-reverse;"></div>
-    <div class="particle w-1 h-1 bg-white-400/40 rounded-full top-[75%] left-[35%] blur-none" style="animation: floatParticle 13s infinite alternate;"></div>
-    <div class="particle w-2 h-2 bg-white-400/30 rounded-full top-[85%] left-[50%] blur-[0.5px]" style="animation: floatParticle 15s infinite alternate-reverse;"></div>
-    <div class="particle w-1 h-1 bg-white-500/40 rounded-full top-[5%] left-[70%] blur-none" style="animation: floatParticle 7s infinite alternate;"></div>
-    <div class="particle w-1.5 h-1.5 bg-white-400/35 rounded-full top-[25%] left-[80%] blur-[0.5px]" style="animation: floatParticle 16s infinite alternate-reverse;"></div>
-    <div class="particle w-1 h-1 bg-white-500/40 rounded-full top-[50%] left-[90%] blur-none" style="animation: floatParticle 12s infinite alternate;"></div>
-    <div class="particle w-2 h-2 bg-white-500/30 rounded-full top-[70%] left-[75%] blur-[0.5px]" style="animation: floatParticle 10s infinite alternate-reverse;"></div>
-    <div class="particle w-1 h-1 bg-white-500/40 rounded-full top-[40%] left-[60%] blur-none" style="animation: floatParticle 14s infinite alternate;"></div>
-    <div class="particle w-1.5 h-1.5 bg-white-400/35 rounded-full top-[80%] left-[85%] blur-[0.5px]" style="animation: floatParticle 9s infinite alternate-reverse;"></div>
-    <div class="particle w-1 h-1 bg-white-400/40 rounded-full top-[10%] left-[95%] blur-none" style="animation: floatParticle 11s infinite alternate;"></div>
+    <div
+      v-for="particle in particles"
+      :key="particle.id"
+      :class="particle.className"
+      :style="particle.style"
+    ></div>
 
     <div class="absolute w-[350px] h-[350px] rounded-full bg-blue-900/15 blur-[90px] top-[30%] left-[20%] circle-slow" style="animation-duration: 28s;"></div>
     <div class="absolute w-[280px] h-[280px] rounded-full bg-indigo-800/10 blur-[80px] top-[10%] right-[10%] circle-slow" style="animation-duration: 30s;"></div>
@@ -71,14 +93,14 @@ const nav = (page) => emit('navigate', page)
         Product designer focused on crafting modern digital experiences, intuitive interfaces, and scalable design systems.
       </p>
       <div class="mt-12 flex gap-4 justify-center flex-wrap">
-        <a href="#" @click.prevent="nav('work')" class="bg-white text-black px-8 py-4 rounded-full font-medium hover:scale-105 transition inline-block shadow-lg">View Work</a>
-        <a href="#" @click.prevent="nav('about')" class="glass px-8 py-4 rounded-full hover:bg-white/10 transition inline-block backdrop-blur-md">About Me</a>
+        <a href="#work" @click.prevent="nav('work')" class="bg-white text-black px-8 py-4 rounded-full font-medium hover:scale-105 transition inline-block shadow-lg">View Work</a>
+        <a href="#about" @click.prevent="nav('about')" class="glass px-8 py-4 rounded-full hover:bg-white/10 transition inline-block backdrop-blur-md">About Me</a>
       </div>
 
       <div class="mt-20 marquee-container">
         <div class="marquee-track">
           <span v-for="skill in skills" :key="skill" class="skill-tag">{{ skill }}</span>
-          <span v-for="skill in skills" :key="'dup-' + skill" class="skill-tag">{{ skill }}</span>
+          <span v-for="skill in skills" :key="`dup-${skill}`" class="skill-tag">{{ skill }}</span>
         </div>
       </div>
     </div>

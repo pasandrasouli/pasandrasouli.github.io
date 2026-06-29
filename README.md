@@ -1,22 +1,26 @@
 # Pasand Rasouli Portfolio
 
-Vue + Vite portfolio site.
+Vue + Vite + TypeScript portfolio site.
 
 ## Development
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
-## Build for production
+## Quality checks
 
 ```bash
-npm run build
-npm run preview
+pnpm typecheck
+pnpm lint
+pnpm build
+pnpm preview
 ```
 
-Deploy the `dist/` folder to GitHub Pages.
+## Deployment
+
+The repo includes a GitHub Actions workflow that typechecks, builds, and deploys `dist/` to GitHub Pages.
 
 ## Project data
 

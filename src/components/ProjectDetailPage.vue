@@ -1,13 +1,18 @@
-<script setup>
+<script setup lang="ts">
 import CaseStudyBlock from './CaseStudyBlock.vue'
+import type { Page, Project } from '../types'
 
-defineProps({
-  project: { type: Object, default: null },
-})
+defineProps<{
+  project: Project | null
+}>()
 
-const emit = defineEmits(['navigate'])
+const emit = defineEmits<{
+  navigate: [page: Page]
+}>()
 
-const back = () => emit('navigate', 'work')
+function back() {
+  emit('navigate', 'work')
+}
 </script>
 
 <template>

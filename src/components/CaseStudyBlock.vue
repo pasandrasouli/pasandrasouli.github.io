@@ -1,7 +1,9 @@
-<script setup>
-defineProps({
-  block: { type: Object, required: true },
-})
+<script setup lang="ts">
+import type { CaseStudyBlock } from '../types'
+
+defineProps<{
+  block: CaseStudyBlock
+}>()
 </script>
 
 <template>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import projectsData from './data/projects.json'
 import { useGlassCursor } from './composables/useGlassCursor'
+import { SITE_TITLE } from './constants'
 import type { Page, Project } from './types'
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
@@ -12,17 +13,34 @@ import AboutPage from './components/AboutPage.vue'
 import ProcessPage from './components/ProcessPage.vue'
 import ContactPage from './components/ContactPage.vue'
 
+const projects: Project[] = projectsData as Project[]
 const currentPage = ref<Page>('home')
 const selectedProjectId = ref<number | null>(null)
-const projects = ref<Project[]>(projectsData as Project[])
 const glassCursor = ref<HTMLElement | null>(null)
 
 const selectedProject = computed(() => {
   if (!selectedProjectId.value) return null
-  return projects.value.find((p) => p.id === selectedProjectId.value) ?? null
+  return projects.find((p) => p.id === selectedProjectId.value) ?? null
 })
 
 useGlassCursor(currentPage, glassCursor)
+
+function updateDocumentTitle() {
+  if (currentPage.value === 'project-detail' && selectedProject.value) {
+    document.title = `${selectedProject.value.title} — ${SITE_TITLE}`
+    return
+  }
+
+  const pageTitles: Record<Exclude<Page, 'project-detail'>, string> = {
+    home: SITE_TITLE,
+    work: `Work — ${SITE_TITLE}`,
+    about: `About — ${SITE_TITLE}`,
+    process: `Process — ${SITE_TITLE}`,
+    contact: `Contact — ${SITE_TITLE}`,
+  }
+
+  document.title = pageTitles[currentPage.value as Exclude<Page, 'project-detail'>] ?? SITE_TITLE
+}
 
 function navigate(page: Page, projectId: number | null = null) {
   if (page === 'project-detail' && projectId) {
@@ -57,7 +75,7 @@ function handleHash() {
   const hash = window.location.hash.slice(1)
   if (hash.startsWith('project/')) {
     const id = parseInt(hash.split('/')[1], 10)
-    if (id && projects.value.find((p) => p.id === id)) {
+    if (id && projects.find((p) => p.id === id)) {
       currentPage.value = 'project-detail'
       selectedProjectId.value = id
       return
@@ -85,6 +103,8 @@ function handleHash() {
   }
   selectedProjectId.value = null
 }
+
+watch([currentPage, selectedProject], updateDocumentTitle, { immediate: true })
 
 onMounted(() => {
   window.addEventListener('hashchange', handleHash)
@@ -123,7 +143,7 @@ onBeforeUnmount(() => {
       </Transition>
     </main>
 
-    <AppFooter @navigate="navigate" />
+    <AppFooter />
 
     <div ref="glassCursor" class="glass-cursor" aria-hidden="true"></div>
   </div>

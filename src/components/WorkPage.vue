@@ -1,11 +1,17 @@
-<script setup>
-defineProps({
-  projects: { type: Array, required: true },
-})
+<script setup lang="ts">
+import type { Project } from '../types'
 
-const emit = defineEmits(['open-project'])
+defineProps<{
+  projects: Project[]
+}>()
 
-const openProject = (id) => emit('open-project', id)
+const emit = defineEmits<{
+  'open-project': [id: number]
+}>()
+
+function openProject(id: number) {
+  emit('open-project', id)
+}
 </script>
 
 <template>
