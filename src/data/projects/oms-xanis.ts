@@ -4,7 +4,7 @@ export const omsXanis: Project = {
   id: 5,
   title: 'OMS Xanis',
   category: '',
-  coverImage: '',
+  coverImage: "./public/assets/images/Cover/transaction.png",
   fullDescription: '',
   results: [],
   caseStudy: [

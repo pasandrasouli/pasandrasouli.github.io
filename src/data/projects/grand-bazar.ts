@@ -58,18 +58,47 @@ export const grandBazar: Project = {
     
     { type: "image", caption: "My Role", src: "./public/assets/images/Grandbazar/MyRole.png" },
 
-    { type: "image", caption: "My Role", src: "./public/assets/images/Grandbazar/DesignThinkingProcess.png" },
+    { type: "image", caption: "Design Thinking Process", src: "./public/assets/images/Grandbazar/DesignThinkingProcess.png" },
+    { type: "image", caption: "Project Timeline", src: "./public/assets/images/Grandbazar/ProjectTimeline.png" },
 
     {
       type: "withBullet",
-      title: "Problem Framing",
-      titleGroups: [{ subTitle: "Initial problem: ", description: "Build an AI tool for video generation and trend discovery" }],
+      title: "Emphatize Phase",
+      titleGroups: [
+        { subTitle: "Qualitative Research: ", description: "We conducted 1-on-1 user interviews with potential users who actively use credit services from different providers. The goal was to understand:" },
+      ],
       items: [
-        "They don't know which trends are working,",
-        "They have ideas but don't know how to write professional scripts.",
-        "They create videos but don't realize issues until after posting."
+        "How they track their credit",
+        "The challenges they face",
+        "Their behavior when purchasing with credit"
       ],
     },
+    {
+      type: "withBullet",
+      title: "Key Insight Derived",
+      titleGroups: [
+        { subTitle: "", description: "" },
+      ],
+      items: [
+        "Users lack a unified view of their credit – Most participants didn’t know how much total credit they had across platforms.",
+        "Fragmented credit creates confusion – Switching between apps or providers made users feel frustrated and disoriented.",
+        "Trust issues in using credit – Many users hesitated to use credit due to unclear terms, limits, or repayment plans.",
+        "Desire for control and visibility – Users wanted a single place to see, manage, and plan their credit usage and installments.",
+        "Mixed shopping behavior – Users shop both online and offline, but expect a consistent credit experience across both.",
+        "Reminder & management tools are missing – Several users reported missing installment payments"
+
+      ],
+    },
+          {
+      type: "section",
+      title: "Quantitative Research",
+      description: " To validate the patterns observed in user interviews, we conducted a survey with 150+ participants who were active credit users. The goal was to gather measurable data on user behavior, pain points, and expectations."
+    },
+    { type: "image", caption: "Quantitative Research", src: "./public/assets/images/Grandbazar/QuantitativeResearch.png" },
+     
+    { type: "image", caption: "Information Architecture", src: "./public/assets/images/Grandbazar/UserPersona.png" },
+    { type: "image", caption: "Typography & Colors", src: "./public/assets/images/Grandbazar/Typography&Colors.png" },
+    { type: "image", caption: "High-Fidelity Wireframes", src: "./public/assets/images/Grandbazar/HighFidelityWireframes.png" },
    
   ]
 }
