@@ -61,8 +61,7 @@ export function useGlassCursor(currentPage: Ref<Page>, cursorRef: Ref<HTMLElemen
     cursor.style.top = `${event.clientY}px`
 
     const overLink =
-      event.target instanceof Element &&
-      !!event.target.closest('#home-hero a, #home-hero button')
+      event.target instanceof Element && !!event.target.closest('#home-hero a, #home-hero button')
     cursor.classList.toggle('hover', overLink)
   }
 

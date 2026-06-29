@@ -17,7 +17,9 @@ const content = site.about
         </div>
 
         <div class="text-center md:text-left">
-          <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-2">{{ content.eyebrow }}</p>
+          <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-2">
+            {{ content.eyebrow }}
+          </p>
           <h2 class="text-3xl md:text-5xl font-semibold tracking-tight leading-tight">
             <span v-for="(line, index) in content.titleLines" :key="line">
               {{ line }}<br v-if="index < content.titleLines.length - 1" />

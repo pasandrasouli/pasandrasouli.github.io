@@ -9,7 +9,9 @@ defineProps<{
 <template>
   <div v-if="block.type === 'section'" class="mt-10 first:mt-0">
     <h2 class="text-2xl md:text-3xl font-bold mb-4">{{ block.title }}</h2>
-    <p v-if="block.description" class="text-white/70 text-lg leading-relaxed">{{ block.description }}</p>
+    <p v-if="block.description" class="text-white/70 text-lg leading-relaxed">
+      {{ block.description }}
+    </p>
     <figure v-if="block.imageSrc" class="mt-6">
       <img :src="block.imageSrc" :alt="block.title" class="rounded-2xl w-full" />
     </figure>
@@ -17,7 +19,9 @@ defineProps<{
 
   <figure v-else-if="block.type === 'image'" class="my-8">
     <img :src="block.src" :alt="block.caption || ''" class="rounded-2xl w-full" />
-    <figcaption v-if="block.caption" class="text-white/40 text-sm text-center mt-3">{{ block.caption }}</figcaption>
+    <figcaption v-if="block.caption" class="text-white/40 text-sm text-center mt-3">
+      {{ block.caption }}
+    </figcaption>
   </figure>
 
   <div v-else-if="block.type === 'twoColumn'" class="grid md:grid-cols-2 gap-8 my-10">
@@ -72,7 +76,12 @@ defineProps<{
   </div>
 
   <div v-else-if="block.type === 'video'" class="aspect-video my-8">
-    <iframe :src="block.embedUrl" class="w-full h-full rounded-2xl" frameborder="0" allowfullscreen></iframe>
+    <iframe
+      :src="block.embedUrl"
+      class="w-full h-full rounded-2xl"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
   </div>
 
   <div

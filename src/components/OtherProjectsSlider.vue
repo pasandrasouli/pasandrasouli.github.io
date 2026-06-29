@@ -35,8 +35,12 @@ function openProject(id: number) {
   <section v-if="otherProjects.length" class="mt-20 border-t border-white/10 pt-16">
     <div class="flex items-end justify-between gap-6 mb-10 flex-wrap">
       <div>
-        <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-4">{{ content.moreProjectsEyebrow }}</p>
-        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">{{ content.moreProjectsTitle }}</h2>
+        <p class="uppercase tracking-[0.25em] text-white/40 text-xs mb-4">
+          {{ content.moreProjectsEyebrow }}
+        </p>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">
+          {{ content.moreProjectsTitle }}
+        </h2>
       </div>
 
       <div class="flex items-center gap-3">
@@ -82,7 +86,9 @@ function openProject(id: number) {
               <h3 class="text-xl font-medium">{{ item.title }}</h3>
               <p class="text-white/40 mt-2 text-sm">{{ item.category }}</p>
             </div>
-            <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition shrink-0">
+            <div
+              class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition shrink-0"
+            >
               ↗
             </div>
           </div>
