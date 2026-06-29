@@ -44,6 +44,33 @@ defineProps<{
     </ul>
   </div>
 
+  <div v-else-if="block.type === 'withBullet'" class="mt-10">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6">{{ block.title }}</h2>
+
+    <div v-if="block.titleGroups.length" class="space-y-4 mb-8">
+      <div
+        v-for="(group, index) in block.titleGroups"
+        :key="index"
+        class="text-white/70 text-lg leading-relaxed"
+      >
+        <!-- render each as block elements -->
+        <div class="text-white font-medium">{{ group.subTitle }}</div>
+        <div class="text-white/70">{{ group.description }}</div>
+      </div>
+    </div>
+
+    <ul v-if="block.items.length" class="space-y-3">
+      <li
+        v-for="(item, index) in block.items"
+        :key="index"
+        class="flex gap-3 text-white/70 text-lg leading-relaxed"
+      >
+        <span class="text-white/40 shrink-0">•</span>
+        <span>{{ item }}</span>
+      </li>
+    </ul>
+  </div>
+
   <div v-else-if="block.type === 'video'" class="aspect-video my-8">
     <iframe :src="block.embedUrl" class="w-full h-full rounded-2xl" frameborder="0" allowfullscreen></iframe>
   </div>
