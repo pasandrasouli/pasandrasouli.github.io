@@ -39,6 +39,7 @@
         "type": "section",
         "title": "Understanding the problem",
         "description": "کاربران از دیتاهای پیچیده خسته شده بودن..."
+        "imageSrc": "https://example.com/my-image.jpg",
       },
       { "type": "image", "src": "./assets/images/Cover/trendybee.png", "caption": "تحلیل اولیه" },
       {
