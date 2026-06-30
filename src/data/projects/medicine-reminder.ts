@@ -53,12 +53,12 @@ export const medicineReminder: Project = {
     {
       type: 'image',
       caption: 'Wireframes (Low Fidelity):',
-      src: './Public/assets/images/Medicine/LowFidelity.png',
+      src: './assets/images/Medicine/LowFidelity.png',
     },
     {
       type: 'image',
       caption: 'Visual Design (Mid-Fidelity):',
-      src: './Public/assets/images/Medicine/Mid-Fidelity.png',
+      src: './assets/images/Medicine/Mid-Fidelity.png',
     },
 
     {

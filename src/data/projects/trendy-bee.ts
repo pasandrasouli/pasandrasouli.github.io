@@ -18,10 +18,10 @@ export const trendyBee: Project = {
     {
       type: 'image',
       caption: 'Design Thinking Process',
-      src: './Public/assets/images/Trendybee/DesignThinkingProcess.png',
+      src: './assets/images/Trendybee/DesignThinkingProcess.png',
     },
 
-    { type: 'image', caption: 'My Role', src: './Public/assets/images/Trendybee/MyRole.png' },
+    { type: 'image', caption: 'My Role', src: './assets/images/Trendybee/MyRole.png' },
 
     {
       type: 'withBullet',
@@ -76,19 +76,19 @@ export const trendyBee: Project = {
     {
       type: 'image',
       caption: 'Low-Fidelity Wireframes',
-      src: './Public/assets/images/TrendyBee/LowFidelityWireframes.png',
+      src: './assets/images/TrendyBee/LowFidelityWireframes.png',
     },
    
     
     {
       type: 'image',
       caption: 'Typography & Colors',
-      src: './Public/assets/images/TrendyBee/Typography&Colors.png',
+      src: './assets/images/TrendyBee/Typography&Colors.png',
     },
     {
       type: 'image',
       caption: 'High-Fidelity Wireframes',
-      src: './Public/assets/images/TrendyBee/HighFidelityWireframes.png',
+      src: './assets/images/TrendyBee/HighFidelityWireframes.png',
     },
   ],
 }

@@ -60,47 +60,47 @@ export const oms: Project = {
      {
       type: 'image',
       caption: 'Pain Points',
-      src: './Public/assets/images/OMS/PainPoints.png',
+      src: './assets/images/OMS/PainPoints.png',
     },
      {
       type: 'image',
       caption: '',
-      src: './Public/assets/images/OMS/UserPersona01.png',
+      src: './assets/images/OMS/UserPersona01.png',
     },
      {
       type: 'image',
       caption: '',
-      src: './Public/assets/images/OMS/UserPersona02.png',
+      src: './assets/images/OMS/UserPersona02.png',
     },
      {
       type: 'image',
       caption: '',
-      src: './Public/assets/images/OMS/UserPersona03.png',
+      src: './assets/images/OMS/UserPersona03.png',
     },
      {
       type: 'image',
       caption: '',
-      src: './Public/assets/images/OMS/UserJourney.png',
+      src: './assets/images/OMS/UserJourney.png',
     },
      {
       type: 'image',
       caption: '',
-      src: './Public/assets/images/OMS/InformationArchitecture.png',
+      src: './assets/images/OMS/InformationArchitecture.png',
     },
      {
       type: 'image',
       caption: '',
-      src: './Public/assets/images/OMS/Low-fidelity.png',
+      src: './assets/images/OMS/Low-fidelity.png',
     },
      {
       type: 'image',
       caption: '',
-      src: './Public/assets/images/OMS/Dark.png',
+      src: './assets/images/OMS/Dark.png',
     },
      {
       type: 'image',
       caption: '',
-      src: './Public/assets/images/OMS/Light.png',
+      src: './assets/images/OMS/Light.png',
     },
    
 ],

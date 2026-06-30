@@ -33,7 +33,7 @@ export const omsXanis: Project = {
     {
       type: 'section',
       title: 'Design Timeline',
-      imageSrc: './Public/assets/images/OMSXaniiss/DesignTimeline.png',
+      imageSrc: './assets/images/OMSXaniiss/DesignTimeline.png',
       description: "",
     },
     {
@@ -45,7 +45,7 @@ export const omsXanis: Project = {
     {
       type: 'section',
       title: 'Competitive Analysis',
-      imageSrc: './Public/assets/images/OMSXaniiss/CompetitiveAnalysis.png',
+      imageSrc: './assets/images/OMSXaniiss/CompetitiveAnalysis.png',
       description: "",
     },
    
@@ -70,57 +70,57 @@ export const omsXanis: Project = {
     {
       type: 'section',
       title: '',
-      imageSrc: './Public/assets/images/OMSXaniiss/Observatons.png',
+      imageSrc: './assets/images/OMSXaniiss/Observatons.png',
       description: "",
     },
     {
       type: 'section',
       title: 'Empathy Map',
-      imageSrc: './Public/assets/images/OMSXaniiss/EmpathyMap.png',
+      imageSrc: './assets/images/OMSXaniiss/EmpathyMap.png',
       description: "",
     },
     {
       type: 'section',
       title: 'Pain Points',
-      imageSrc: './Public/assets/images/OMSXaniiss/PainPoints.png',
+      imageSrc: './assets/images/OMSXaniiss/PainPoints.png',
       description: "",
     },
     {
       type: 'section',
       title: 'User Persona',
-      imageSrc: './Public/assets/images/OMSXaniiss/UserPersona.png',
+      imageSrc: './assets/images/OMSXaniiss/UserPersona.png',
       description: "",
     },
     {
       type: 'section',
       title: 'User Journey Map',
-      imageSrc: './Public/assets/images/OMSXaniiss/UserJourneyMap.png',
+      imageSrc: './assets/images/OMSXaniiss/UserJourneyMap.png',
       description: "Goal: Quick and efficient trading with the ability to place multiple orders simultaneously to leverage diverse opportunities and enhance user experience.",
     },
   
     {
       type: 'section',
       title: 'High Fidelity Screen',
-      imageSrc: './Public/assets/images/OMSXaniiss/Screen1.png',
+      imageSrc: './assets/images/OMSXaniiss/Screen1.png',
       description: "",
     },
     {
       type: 'section',
       title: '',
-      imageSrc: './Public/assets/images/OMSXaniiss/Screen2.png',
+      imageSrc: './assets/images/OMSXaniiss/Screen2.png',
       description: "",
     },
     {
       type: 'section',
       title: '',
-      imageSrc: './Public/assets/images/OMSXaniiss/Screen3.png',
+      imageSrc: './assets/images/OMSXaniiss/Screen3.png',
       description: "",
     },
    
     {
       type: 'section',
       title: '',
-      imageSrc: './Public/assets/images/OMSXaniiss/Screen2.png',
+      imageSrc: './assets/images/OMSXaniiss/Screen2.png',
       description: "",
     },
  
