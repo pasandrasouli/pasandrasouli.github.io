@@ -49,20 +49,16 @@ export const medicineReminder: Project = {
       ],
     },
 
-    {
-      type: 'image',
-      caption: 'Information Architecture (IA):',
-      src: 'https://placehold.co/600x400/EEE/31343C',
-    },
+    
     {
       type: 'image',
       caption: 'Wireframes (Low Fidelity):',
-      src: 'https://placehold.co/600x400/EEE/31343C',
+      src: './Public/assets/images/Medicine/LowFidelity.png',
     },
     {
       type: 'image',
       caption: 'Visual Design (Mid-Fidelity):',
-      src: 'https://placehold.co/600x400/EEE/31343C',
+      src: './Public/assets/images/Medicine/Mid-Fidelity.png',
     },
 
     {
