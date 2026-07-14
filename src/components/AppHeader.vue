@@ -48,17 +48,19 @@ function hashFor(page: Page) {
           @click.prevent="nav(item.page)"
           class="nav-link transition hover:text-white"
           :class="{ 'nav-link-active': isActive(item.page) }"
-          >{{ item.label }}</a
-        >
+        >{{ item.label }}</a>
       </nav>
 
       <div class="flex items-center gap-3">
         <a
-          href="#contact"
-          @click.prevent="nav('contact')"
+          href="/resume.pdf"
+          download
+          target="_blank"
+          rel="noopener noreferrer"
           class="hidden sm:inline-flex border border-white/10 hover:border-white/30 transition px-5 py-2 rounded-full text-sm"
-          >{{ site.ctaLabel }}</a
         >
+          Download Resume
+        </a>
 
         <button
           type="button"
@@ -85,14 +87,16 @@ function hashFor(page: Page) {
           @click.prevent="nav(item.page)"
           class="nav-link transition hover:text-white py-2"
           :class="{ 'nav-link-active': isActive(item.page) }"
-          >{{ item.label }}</a
-        >
+        >{{ item.label }}</a>
         <a
-          href="#contact"
-          @click.prevent="nav('contact')"
+          href="/resume.pdf"
+          download
+          target="_blank"
+          rel="noopener noreferrer"
           class="mt-2 border border-white/10 hover:border-white/30 transition px-5 py-2 rounded-full text-sm text-center"
-          >{{ site.ctaLabel }}</a
         >
+          Download Resume
+        </a>
       </div>
     </nav>
   </header>
